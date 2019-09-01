@@ -1,28 +1,45 @@
 import React, { Component } from 'react';
 import './style.css'
+import {getPercentage} from "../../utils/percent";
 
 export default class ProgressBar extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            percentage: props.percentage
+            percentage: 100,
+            value: props.value,
+            maxValue: props.maxValue
         };
     }
 
     componentDidUpdate(oldProps) {
-        const newProps = this.props;
-        if(oldProps.percentage !== newProps.percentage) {
-            this.setState({ percentage: newProps.percentage < 0 ? 0 : newProps.percentage})
+        const oldValue = oldProps.value;
+        const oldMaxValue = oldProps.maxValue;
+        const {value, maxValue} = this.props;
+        console.log(oldValue && oldMaxValue && value && maxValue);
+        if (oldProps.value && oldProps.maxValue && value && maxValue){
+            const oldPercentage = getPercentage(oldValue, oldMaxValue);
+            const newPercentage = getPercentage(value, maxValue);
+            if(oldPercentage !== newPercentage) {
+                this.setState({ percentage: newPercentage < 0 ? 0 : newPercentage})
+            }
         }
     }
 
     render() {
-        const {percentage} = this.state;
+        const { className, type, value, maxValue, prefix, postfix } = this.props;
+        const {percentage } = this.state;
+        let barValue = percentage;
+        if (type === 'value') {
+            barValue = value;
+        } else if (type === 'valueWithMax') {
+            barValue = `${value}/${maxValue}`;
+        }
         return (
-            <div className="progress-bar">
+            <div  className={`progress-bar ${ className }` }>
                 <div className="filler" style={{ width: `${percentage}%` }}/>
-                <span className={"bar-value"}>{percentage}%</span>
+                <span className={"bar-value"}>{prefix}{barValue}{postfix}</span>
             </div>
         )
     }

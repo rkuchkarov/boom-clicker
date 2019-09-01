@@ -1,11 +1,9 @@
 import React from 'react';
-import Castle from "../castle/castle";
-import Player from "../player/player";
+import BattleContainer from "../../containers/battle-container";
 
 const BattlePage = () => {
     return <div>
-        <Castle/>
-        <Player/>
+        <BattleContainer/>
     </div>
 };
 

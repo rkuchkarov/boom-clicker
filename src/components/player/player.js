@@ -1,12 +1,12 @@
-import React, { Component, Fragment } from 'react';
-import './style.css';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './style.css';
 
 import { withBoomClickerService } from '../hoc';
 import { playerLoaded } from "../../actions";
+import ProgressBar from "../progress-bar/progress-bar";
 
 class Player extends Component {
-
     componentDidMount() {
         const { boomClickerService } = this.props;
         const player = boomClickerService.getPlayer();
@@ -15,12 +15,34 @@ class Player extends Component {
     }
 
     render() {
-        const { level, damage } = this.props;
+        const {
+            level,
+            damage,
+            reloading,
+            reloadTime,
+            reloadTimeRemaining,
+            units,
+            unitDamage
+        } = this.props;
         return (
-            <Fragment>
-                <div>Player lvl: {level}</div>
-                <div>Player dmg: {damage}</div>
-            </Fragment>
+            <div className="player">
+                {reloading? (
+                    <ProgressBar
+                        value={reloadTimeRemaining}
+                        maxValue={reloadTime}
+                        type="value"
+                        className={"reload-bar"}
+                        prefix={"Reloading: "}
+                        postfix={""}
+                    />
+                ) : (
+                    <div className="player-info">
+                        <div>Player lvl: {level}</div>
+                        <div>Player dmg: {damage}</div>
+                        <div>Player units: {units} ({units * unitDamage} DPS)</div>
+                    </div>
+                )}
+            </div>
         );
     }
 }
@@ -28,7 +50,12 @@ class Player extends Component {
 const mapStateToProps = ({ player }) => {
     return {
         level: player.level,
-        damage: player.damage
+        damage: player.damage,
+        reloading: player.reloading,
+        reloadTime: player.reloadTime,
+        reloadTimeRemaining: player.reloadTimeRemaining,
+        units: player.assaultUnits,
+        unitDamage: player.assaultUnitDamage
     };
 };
 

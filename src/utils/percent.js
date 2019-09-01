@@ -1,0 +1,1 @@
+export const getPercentage = (value, maxValue) => Math.floor((value / maxValue) * 100);

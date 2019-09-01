@@ -1,23 +1,15 @@
-.castle {
+.reload-bar {
+    width: 150px;
+    margin-bottom: 31px;
+}
+
+.reload-bar > .filler {
+    background: #eceff1;
+}
+
+.player {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.castle-img {
-    width: 20%;
-    transition: opacity .2s ease-in;
-}
-
-.castle-img:not(.captured):active {
-    animation: scale .4s ease forwards;
-}
-@keyframes scale {
-    to {
-        transform: scale(0.93);
-    }
-}
-
-.captured {
-    opacity: 0.2;
 }

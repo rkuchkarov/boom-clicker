@@ -1,65 +1,58 @@
 import React, { Component } from 'react';
-import castle from './castle.png';
-import './style.css';
-import ProgressBar from "../progress-bar/progress-bar";
 import { connect } from 'react-redux';
 
 import { withBoomClickerService } from '../hoc';
-import { castleLoaded, castleDamaged } from "../../actions";
+import { castleLoaded } from "../../actions";
 import { bindActionCreators } from "redux";
+import castle from "./castle.png";
+import './style.css';
+import ProgressBar from "../progress-bar/progress-bar";
 
 class Castle extends Component {
-    constructor(props) {
-        super(props);
-        this.takeDamage = this.takeDamage.bind(this);
-    }
 
     componentDidMount() {
-        const { boomClickerService } = this.props;
-        const castle = boomClickerService.getCastle();
+        const { boomClickerService, level } = this.props;
+        const castle = boomClickerService.getCastle(level);
 
         this.props.castleLoaded(castle);
     }
 
-    takeDamage() {
-        this.props.castleDamaged(this.props.playerDamage);
-    }
-
     render() {
-        const { level, fullHealth, health, captured } = this.props;
-        const healthPercent = Math.floor((health / fullHealth) * 100);
-        return (
+        const { isPlayerReloading, captured, handleClick, health, fullHealth} = this.props;
+        return(
             <div className={"castle"}>
-                <h1>Hello, i'm a castle!</h1>
-                <span>Castle lvl: {level}</span>
-                <span>Health: {health}/{fullHealth}</span>
                 <img
-                    onClick={!captured ? this.takeDamage: undefined}
-                    className={"castle-img " + (captured ? "captured" : "")}
+                    onClick={isPlayerReloading || captured ? undefined : handleClick}
+                    className={"castle-img" + (isPlayerReloading ? " reloading" : "") + (captured ? " captured" : "")}
                     src={castle}
-                    alt="Castle" />
+                    alt="Castle"
+                />
                 <ProgressBar
-                    percentage={healthPercent}
-                    className={"health-bar"} />
+                    value={health}
+                    maxValue={fullHealth}
+                    type="valueWithMax"
+                    className={"health-bar"}
+                    prefix={""}
+                    postfix={" HP"}
+                />
             </div>
-        );
+        )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        level: state.castle.level,
         fullHealth: state.castle.fullHealth,
         health: state.castle.health,
         captured: state.castle.captured,
-        playerDamage: state.player.damage
+        level: state.level,
+        isPlayerReloading: state.player.reloading
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        castleLoaded,
-        castleDamaged
+        castleLoaded
     }, dispatch);
 };
 
