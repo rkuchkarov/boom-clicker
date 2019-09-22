@@ -8,7 +8,7 @@ const LEVELS = {
     2: {
         health: 75,
         fullHealth: 75,
-        restore: 1,
+        restore: 0,
         assaultDefense: 1
     },
     3: {
@@ -20,13 +20,13 @@ const LEVELS = {
     4: {
         health: 125,
         fullHealth: 125,
-        restore: 1,
+        restore: 0.5,
         assaultDefense: 1
     },
     5: {
         health: 200,
         fullHealth: 200,
-        restore: 1,
+        restore: 0.5,
         assaultDefense: 1
     }
 };
@@ -53,14 +53,14 @@ const PLAYER_LEVELS = {
     4: {
         damage: 12,
         reloadTime: 8,
-        assaultUnits: 10,
-        assaultUnitDamage: 0.5
+        assaultUnits: 12,
+        assaultUnitDamage: 0.6
     },
     5: {
         damage: 12,
         reloadTime: 8,
-        assaultUnits: 10,
-        assaultUnitDamage: 0.5
+        assaultUnits: 12,
+        assaultUnitDamage: 0.6
     }
 };
 
