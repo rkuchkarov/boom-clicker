@@ -1,9 +1,9 @@
-.reload-bar {
-    width: 150px;
+.reloadBar {
+    width: 350px;
     margin-bottom: 31px;
 }
 
-.reload-bar > .filler {
+.reloadBar > .filler {
     background: #eceff1;
 }
 

@@ -17,19 +17,16 @@ export default class ProgressBar extends Component {
         const oldValue = oldProps.value;
         const oldMaxValue = oldProps.maxValue;
         const {value, maxValue} = this.props;
-        console.log(oldValue && oldMaxValue && value && maxValue);
-        if (oldProps.value && oldProps.maxValue && value && maxValue){
-            const oldPercentage = getPercentage(oldValue, oldMaxValue);
-            const newPercentage = getPercentage(value, maxValue);
-            if(oldPercentage !== newPercentage) {
-                this.setState({ percentage: newPercentage < 0 ? 0 : newPercentage})
-            }
+        const oldPercentage = getPercentage(oldValue, oldMaxValue);
+        const newPercentage = getPercentage(value, maxValue);
+        if(oldPercentage !== newPercentage) {
+            this.setState({ percentage: newPercentage < 0 ? 0 : newPercentage})
         }
     }
 
     render() {
         const { className, type, value, maxValue, prefix, postfix } = this.props;
-        const {percentage } = this.state;
+        const { percentage } = this.state;
         let barValue = percentage;
         if (type === 'value') {
             barValue = value;
