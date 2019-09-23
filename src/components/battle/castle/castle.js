@@ -1,14 +1,14 @@
 import * as React from 'react';
-import ProgressBar from "../progress-bar/progress-bar";
+import ProgressBar from "../../progress-bar/progress-bar";
 import castle from "./castle.png";
 
 import './style.css';
 
-const Castle = ({ isPlayerReloading, captured, handleClick, health, fullHealth }) => (
+const Castle = ({ isPlayerReloading, isCastleCaptured, handleClick, health, fullHealth }) => (
     <div className={"castle"}>
         <img
-            onClick={isPlayerReloading || captured ? undefined : handleClick}
-            className={"castle-img" + (isPlayerReloading ? " reloading" : "") + (captured ? " captured" : "")}
+            onClick={isPlayerReloading || isCastleCaptured ? undefined : handleClick}
+            className={"castle-img" + (isPlayerReloading ? " reloading" : "") + (isCastleCaptured ? " captured" : "")}
             src={castle}
             alt="Castle"
         />

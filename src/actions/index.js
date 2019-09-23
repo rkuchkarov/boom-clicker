@@ -1,9 +1,12 @@
 export const RESET_STATE = 'RESET_STATE';
+export const BATTLE_PREPARE = 'BATTLE_PREPARE';
 export const BATTLE_START = 'BATTLE_START';
+export const BATTLE_END = 'BATTLE_END';
 export const LEVEL_FETCH = 'LEVEL_FETCH';
 export const LEVEL_LOADED = 'LEVEL_LOADED';
 export const PLAYER_FETCH = 'PLAYER_FETCH';
 export const PLAYER_LOADED = 'PLAYER_LOADED';
+export const PLAYER_ATTACK = 'PLAYER_ATTACK';
 export const PLAYER_RELOADING = 'PLAYER_RELOADING';
 export const RELOAD_SEC_PASSED = 'RELOAD_SEC_PASSED';
 export const PLAYER_RELOADED = 'PLAYER_RELOADED';
@@ -17,6 +20,7 @@ export const CASTLE_ASSAULT_REBUFF = 'CASTLE_ASSAULT_REBUFF';
 export const ASSAULT_STARTED = 'ASSAULT_STARTED';
 export const ASSAULT_SEC_PASSED = 'ASSAULT_SEC_PASSED';
 export const ASSAULT_FINISHED = 'ASSAULT_FINISHED';
+export const REWARD_LOADED = 'REWARD_LOADED';
 
 export const resetState = () => {
     return {
@@ -24,9 +28,21 @@ export const resetState = () => {
     }
 };
 
+export const battlePrepare = () => {
+    return {
+        type: BATTLE_PREPARE
+    }
+};
+
 export const battleStart = () => {
     return {
         type: BATTLE_START
+    }
+};
+
+export const battleEnd = () => {
+    return {
+        type: BATTLE_END
     }
 };
 
@@ -74,6 +90,12 @@ export const playerReloaded = () => {
     }
 };
 
+export const playerAttack = () => {
+    return {
+        type: PLAYER_ATTACK
+    }
+};
+
 export const castleFetch = () => {
     return {
         type: CASTLE_FETCH
@@ -100,9 +122,10 @@ export const castleCaptured = () => {
     }
 };
 
-export const castleRestore = () => {
+export const castleRestore = (restoreHP) => {
     return {
-        type: CASTLE_RESTORE
+        type: CASTLE_RESTORE,
+        restoreHP
     }
 };
 
@@ -133,5 +156,12 @@ export const assaultSecPassed = () => {
 export const assaultFinished = () => {
     return {
         type: ASSAULT_FINISHED
+    }
+};
+
+export const rewardLoaded = (reward) => {
+    return {
+        type: REWARD_LOADED,
+        reward
     }
 };

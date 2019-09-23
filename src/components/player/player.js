@@ -3,9 +3,9 @@ import ProgressBar from "../progress-bar/progress-bar";
 
 import './style.css';
 
-const Player = ({ level, playerDamage, reloading, reloadTime, reloadTimeRemaining, playerUnits, playerUnitDamage}) => (
+const Player = ({ level, playerDamage, isReloading, reloadTime, reloadTimeRemaining, playerUnits, playerUnitDamage}) => (
     <div className={'player'}>
-        {reloading? (
+        { isReloading ? (
             <ProgressBar
                 value={reloadTimeRemaining}
                 maxValue={reloadTime}

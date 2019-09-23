@@ -34,30 +34,40 @@ const LEVELS = {
 const PLAYER_LEVELS = {
     1: {
         damage: 10,
+        criticalChance: 0,
+        criticalDamage: 200,
         reloadTime: 10,
         assaultUnits: 10,
         assaultUnitDamage: 0.5
     },
     2: {
         damage: 12,
+        criticalChance: 0,
+        criticalDamage: 200,
         reloadTime: 10,
         assaultUnits: 10,
         assaultUnitDamage: 0.5
     },
     3: {
         damage: 12,
+        criticalChance: 0,
+        criticalDamage: 200,
         reloadTime: 8,
         assaultUnits: 10,
         assaultUnitDamage: 0.5
     },
     4: {
         damage: 12,
+        criticalChance: 0,
+        criticalDamage: 200,
         reloadTime: 8,
         assaultUnits: 12,
         assaultUnitDamage: 0.6
     },
     5: {
         damage: 12,
+        criticalChance: 50,
+        criticalDamage: 200,
         reloadTime: 8,
         assaultUnits: 12,
         assaultUnitDamage: 0.6
@@ -88,3 +98,10 @@ export const getPlayer = () => {
         level: currentPlayerLevel
     }
 };
+
+export const getReward = () => (
+    {
+        gold: 200,
+        science: 3
+}
+);
