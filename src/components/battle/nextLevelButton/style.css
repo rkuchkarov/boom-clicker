@@ -1,12 +1,12 @@
 .button {
     display: flex;
     width: 220px;
-    margin: 80px 65px 0;
     align-items: center;
     justify-content: center;
     height: 40px;
-    float: right;
     cursor: pointer;
+    align-self: flex-end;
+    margin-top: 20px;
 }
 
 .label {

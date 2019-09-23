@@ -11,6 +11,8 @@ const initialState = {
     },
     player: {
         level: 1,
+        criticalChance: 0,
+        criticalDamage: 200,
         damage: 10,
         reloadTime: 10,
         reloadTimeRemaining: 0,
@@ -19,6 +21,11 @@ const initialState = {
         assaultUnitDamage: 0.5,
         isAssault: false
     },
+    reward: {
+        gold: 0,
+        science: 0
+    },
+    isBattle: false,
     isPlayerLoading: false,
     isCastleFetching: false,
     isLevelFetching: false
@@ -51,19 +58,22 @@ const reducer = (state = initialState, action) => {
             };
 
         case A.PLAYER_LOADED:
-                    return {
-                        ...state,
-                        isPlayerLoading: false,
-                        player: { ...action.player, isReloading: false, reloadTimeRemaining: 0}
-                    };
+            return {
+                ...state,
+                isPlayerLoading: false,
+                player: {
+                    ...action.player,
+                    isReloading: false,
+                    reloadTimeRemaining: 0
+                }
+            };
 
         case A.RELOAD_SEC_PASSED:
-            const newReloadTimeRemaining = state.player.reloadTimeRemaining -= 1;
             return {
                 ...state,
                 player: {
                     ...state.player,
-                    reloadTimeRemaining: newReloadTimeRemaining
+                    reloadTimeRemaining: state.player.reloadTimeRemaining - 1
                 }
             };
 
@@ -84,30 +94,22 @@ const reducer = (state = initialState, action) => {
             };
 
         case A.CASTLE_DAMAGED:
-            let newHealth = state.castle.health - action.damage;
-            if (newHealth < 0) {
-                newHealth = 0;
-            }
+            const newHealth = state.castle.health - action.damage;
 
             return {
                 ...state,
                 castle: {
                     ...state.castle,
-                    health: newHealth
+                    health: newHealth > 0 ? newHealth : 0
                 }
             };
 
         case A.CASTLE_RESTORE:
-            let castleHealth = state.castle.health;
-            if (castleHealth !== state.castle.fullHealth) {
-                castleHealth = state.castle.health + state.castle.restore;
-            }
-
             return {
                 ...state,
                 castle: {
                     ...state.castle,
-                    health: castleHealth > state.castle.fullHealth ? state.castle.fullHealth : castleHealth
+                    health: state.castle.health + action.restoreHP
                 }
             };
 
@@ -123,7 +125,11 @@ const reducer = (state = initialState, action) => {
         case A.PLAYER_RELOADING:
             return {
                 ...state,
-                player: { ...state.player, isReloading: true, reloadTimeRemaining: state.player.reloadTime }
+                player: {
+                    ...state.player,
+                    isReloading: true,
+                    reloadTimeRemaining: state.player.reloadTime
+                }
             };
 
         case A.ASSAULT_STARTED:
@@ -147,10 +153,25 @@ const reducer = (state = initialState, action) => {
         case A.CASTLE_CAPTURED:
             return {
                 ...state,
-                castle: {
-                    ...state.castle,
-                    isCaptured: true
-                }
+                castle: { ...state.castle, isCaptured: true }
+            };
+
+        case A.REWARD_LOADED:
+            return {
+                ...state,
+                reward: action.reward
+            };
+
+        case A.BATTLE_START:
+            return {
+                ...state,
+                isBattle: true
+            };
+
+        case A.BATTLE_END:
+            return {
+                ...state,
+                isBattle: false
             };
 
         default:

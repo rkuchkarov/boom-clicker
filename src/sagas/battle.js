@@ -1,6 +1,8 @@
-import { delay, cancel, take, takeLatest, call, put, fork, select } from 'redux-saga/effects'
+import { delay, cancel, take, takeLatest, call, put, fork, select, takeEvery } from 'redux-saga/effects'
+import _ from 'lodash';
 import * as A from '../actions';
 import * as selectors from "../selectors/selectors";
+import {increaseNumByPercentage} from "../utils/percent";
 
 const ONE_SECOND = 1000;
 
@@ -44,7 +46,8 @@ function* reloadGunTick() {
 }
 
 function* restoreCastleTick() {
-    yield put(A.castleRestore());
+    const castleRestore = yield select(selectors.getCastleRestore);
+    yield put(A.castleRestore(castleRestore));
     const castleHealth = yield select(selectors.getCastleHealth);
     const castleFullHealth = yield select(selectors.getCastleFullHealth);
     if (castleHealth === castleFullHealth) {
@@ -57,6 +60,17 @@ function* castleDamageSaga() {
     if (castleHealth <= 0) {
         yield put(A.castleCaptured());
     }
+}
+
+function* playerAttackSaga() {
+    const playerDamage = yield select(selectors.getPlayerDamage);
+    const playerCriticalChance = yield select(selectors.getPlayerCriticalChance);
+    const playerCriticalDamage = yield select(selectors.getPlayerCriticalDamage);
+
+    const isCriticalHit = _.random(1, 100) <= playerCriticalChance;
+    const finalDamage = isCriticalHit ? increaseNumByPercentage(playerDamage, playerCriticalDamage) : playerDamage;
+    yield put(A.castleDamaged(finalDamage));
+    yield put(A.playerReloading());
 }
 
 function* assaultSaga() {
@@ -81,4 +95,5 @@ export default function* battleSaga() {
     yield fork(reloadSaga);
     yield fork(restoreCastleSaga);
     yield takeLatest(A.CASTLE_DAMAGED, castleDamageSaga);
+    yield takeEvery(A.PLAYER_ATTACK, playerAttackSaga)
 }

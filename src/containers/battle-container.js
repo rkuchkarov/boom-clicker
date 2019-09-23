@@ -1,81 +1,66 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import Player from "../components/player/player";
-import Castle from "../components/castle/castle";
-import InfoBlock from "../components/infoBlock";
-import AssaultButton from "../components/assaultButton";
 import * as selectors from "../selectors/selectors";
-import { castleDamaged, playerReloading, assaultStarted, battleStart } from "../actions";
-import NextLevelButton from "../components/nextLevelButton";
+import Battle from "../components/battle";
+import Reward from "../components/reward";
+import { assaultStarted, battlePrepare, playerAttack } from "../actions";
 
 class BattleContainer extends Component {
     constructor(props) {
         super(props);
-        this.hitCastle = this.hitCastle.bind(this);
-        props.battleStart();
-    }
-
-    hitCastle() {
-        const { playerDamage, castleDamaged, playerReloading } = this.props;
-        castleDamaged(playerDamage);
-        playerReloading();
+        props.battlePrepare();
     }
 
     render() {
         const {
-            assault,
-            captured,
+            isAssault,
+            isReloading,
+            isCastleCaptured,
+            isBattle,
             playerUnits,
             level,
             assaultStarted,
             playerDamage,
             reloadTime,
-            reloading,
             reloadTimeRemaining,
             playerUnitDamage,
             castleFullHealth,
             castleHealth,
-            battleStart
+            battlePrepare,
+            playerAttack,
+            reward
         } = this.props;
 
         return(
-            <div>
-                <InfoBlock level={level} />
-                <Castle
-                    isPlayerReloading={reloading}
-                    captured={captured}
-                    health={castleHealth}
-                    fullHealth={castleFullHealth}
-                    handleClick={this.hitCastle}
-                />
-                <Player
-                    level={level}
-                    reloadTime={reloadTime}
-                    reloading={reloading}
-                    playerDamage={playerDamage}
-                    reloadTimeRemaining={reloadTimeRemaining}
+            <>
+                { !isBattle && <Reward reward={reward} battlePrepare={battlePrepare}/> }
+                <Battle
                     playerUnits={playerUnits}
+                    isAssault={isAssault}
+                    isReloading={isReloading}
+                    isCastleCaptured={isCastleCaptured}
+                    level={level}
+                    assaultStarted={assaultStarted}
+                    playerAttack={playerAttack}
+                    playerDamage={playerDamage}
+                    reloadTime={reloadTime}
+                    reloadTimeRemaining={reloadTimeRemaining}
                     playerUnitDamage={playerUnitDamage}
+                    castleFullHealth={castleFullHealth}
+                    castleHealth={castleHealth}
                 />
-                {captured ? (
-                    <NextLevelButton handleClick={battleStart} />
-                ): (
-                    <AssaultButton
-                        captured={captured}
-                        assault={assault}
-                        playerUnits={playerUnits}
-                        assaultStarted={assaultStarted}
-                    />
-                )}
-            </div>
+            </>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        captured: selectors.getIsCastleCaptured(state),
+        isCastleCaptured: selectors.getIsCastleCaptured(state),
+        isReloading: selectors.getIsPlayerReloading(state),
+        isAssault: selectors.getIsAssault(state),
+        isBattle: selectors.getIsBattle(state),
         level: selectors.getLevel(state),
         castleHealth: selectors.getCastleHealth(state),
         castleFullHealth: selectors.getCastleFullHealth(state),
@@ -83,18 +68,16 @@ const mapStateToProps = (state) => {
         playerUnits: selectors.getPlayerUnits(state),
         playerUnitDamage: selectors.getPlayerUnitDamage(state),
         reloadTime: selectors.getPlayerReloadTime(state),
-        reloading: selectors.getIsPlayerReloading(state),
-        assault: selectors.getIsAssault(state),
-        reloadTimeRemaining: selectors.getPlayerReloadTimeRemaining(state)
+        reloadTimeRemaining: selectors.getPlayerReloadTimeRemaining(state),
+        reward: selectors.getReward(state)
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        castleDamaged,
-        playerReloading,
         assaultStarted,
-        battleStart
+        battlePrepare,
+        playerAttack
     }, dispatch);
 };
 

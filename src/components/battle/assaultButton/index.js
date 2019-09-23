@@ -1,10 +1,10 @@
 import React from 'react';
 import './style.css';
 
-const AssaultButton = ({ assault, playerUnits, captured, assaultStarted }) => {
-    let buttonText = (assault && !captured) ? `${playerUnits} units` : "";
+const AssaultButton = ({ isAssault, playerUnits, isCastleCaptured, assaultStarted }) => {
+    let buttonText = (isAssault && !isCastleCaptured) ? `${playerUnits} units` : "";
     buttonText = playerUnits >= 1 ? buttonText : "No units";
-    const assaultDisabled = playerUnits <= 0 || assault || captured;
+    const assaultDisabled = playerUnits <= 0 || isAssault || isCastleCaptured;
 
     return (
         <div className="assaultButton" onClick={assaultDisabled ? undefined : assaultStarted}>
