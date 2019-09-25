@@ -4,10 +4,9 @@ import castle from "./castle.png";
 
 import './style.css';
 
-const Castle = ({ isPlayerReloading, isCastleCaptured, handleClick, health, fullHealth }) => (
+const Castle = ({ isPlayerReloading, isCastleCaptured, health, fullHealth }) => (
     <div className={"castle"}>
         <img
-            onClick={isPlayerReloading || isCastleCaptured ? undefined : handleClick}
             className={"castle-img" + (isPlayerReloading ? " reloading" : "") + (isCastleCaptured ? " captured" : "")}
             src={castle}
             alt="Castle"

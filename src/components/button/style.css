@@ -1,0 +1,30 @@
+.circle {
+    height: 102px;
+    width: 102px;
+    background-color: #4679BD;
+    border: 10px solid #cfdcec;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.label {
+    color: #e2eaf3;
+    font-weight: bold;
+}
+
+.disabled {
+    background-color: #b9c8dc;
+    cursor: default;
+    color: #536b8a;
+}
+
+.circle:not(.disabled):hover {
+    background:#30588e;
+    width: 96px;
+    height: 96px;
+    border-width: 13px;
+    transition: border-width .2s, width .2s, height .2s;
+}
