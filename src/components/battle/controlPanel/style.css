@@ -1,0 +1,6 @@
+.controlPanel {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 550px;
+    margin: 0 auto;
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import InfoBlock from "./infoBlock";
 import Castle from "./castle";
-import Player from "../player";
-import AssaultButton from "./assaultButton";
+import ControlPanel from "./controlPanel";
+import Player from "./player";
 
 import './style.css';
 
@@ -29,7 +29,6 @@ const Battle = (
             isCastleCaptured={isCastleCaptured}
             health={castleHealth}
             fullHealth={castleFullHealth}
-            handleClick={playerAttack}
         />
         <Player
             isReloading={isReloading}
@@ -40,7 +39,9 @@ const Battle = (
             playerUnits={playerUnits}
             playerUnitDamage={playerUnitDamage}
         />
-        <AssaultButton
+        <ControlPanel
+            isReloading={isReloading}
+            onPlayerAttack={playerAttack}
             isCastleCaptured={isCastleCaptured}
             isAssault={isAssault}
             playerUnits={playerUnits}

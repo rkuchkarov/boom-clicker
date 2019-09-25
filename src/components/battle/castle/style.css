@@ -7,16 +7,6 @@
 .castle-img {
     width: 380px;
     transition: opacity .2s ease-in;
-    cursor: pointer;
-}
-
-.castle-img:not(.captured):not(.reloading):active {
-    animation: scale .4s ease forwards;
-}
-@keyframes scale {
-    to {
-        transform: scale(0.93);
-    }
 }
 
 .captured {
@@ -24,10 +14,6 @@
     cursor: default;
 }
 
-.reloading {
-    cursor: default;
-}
-
-.castle-img:not(.captured):not(.reloading):hover {
+.castle-img:not(.captured):hover {
     opacity: 0.9;
 }
