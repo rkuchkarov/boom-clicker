@@ -7,8 +7,13 @@
 }
 
 .player {
-    margin-top: 20px;
+    margin: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.playerInfo {
+    background-color: #ffffff;
+    padding: 10px;
 }

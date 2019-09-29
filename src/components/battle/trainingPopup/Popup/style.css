@@ -1,0 +1,61 @@
+.trainingWrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+    background-color: #7cb342;
+    align-items: center;
+    width: 430px;
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 17px;
+    justify-content: space-between;
+    position: absolute;
+    right: 100px;
+    bottom: 55px;
+    box-shadow: 0 0 4px #333333;
+    animation: fadein .8s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.highlightElement {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.text {
+    cursor: default;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 29px;
+}
+
+.description {
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+.trainingButton {
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    min-width: 60px;
+    background-color: #689f38;
+    color: white;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: 12px;
+    border: solid 1px #4b830d;
+    user-select: none;
+}
+
+.trainingButton:hover {
+    background-color: #5a9216;
+}

@@ -1,13 +1,16 @@
 import React from 'react';
-import Button from "../../../button";
+import Button from "../../../elements/button";
+import {getPercentage} from "../../../../utils/percent";
 
-import './style.css';
-
-const ShotButton = ({ isReloading, isCastleCaptured, handleClick }) => {
+const ShotButton = ({ isReloading, isCastleCaptured, reloadTimeRemaining, reloadTime, buttonRef, handleClick }) => {
     const isDisabled = isReloading || isCastleCaptured;
+    const reloadPercent = 100 - getPercentage(reloadTimeRemaining, reloadTime);
+    const label = isReloading ? 'Reloading...' : 'Attack';
 
     return (
-        <Button isDisabled={isDisabled} label={'Attack'} handleClick={isDisabled ? undefined : handleClick} />
+        <>
+            <Button percent={reloadPercent} ref={buttonRef} isDisabled={isDisabled} label={label} handleClick={isDisabled ? undefined : handleClick} />
+        </>
     );
 };
 

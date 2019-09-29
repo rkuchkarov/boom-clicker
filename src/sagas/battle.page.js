@@ -37,7 +37,7 @@ function* fetchReward() {
         const reward = yield call(service.getReward);
         yield put(A.rewardLoaded(reward));
         yield delay(400);
-        yield put(A.battleEnd());
+        yield put(A.battleFinished());
     } catch (e) {
         console.log('error', e);
     }
@@ -61,5 +61,4 @@ function* battlePageFlow() {
     yield put(A.levelFetch());
     yield put(A.castleFetch());
     yield put(A.playerFetch());
-    yield put(A.battleStart());
 }
