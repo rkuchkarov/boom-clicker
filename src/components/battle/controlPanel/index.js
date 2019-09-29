@@ -9,13 +9,24 @@ const ControlPanel = (
         isAssault,
         isCastleCaptured,
         playerUnits,
+        reloadTime,
+        reloadTimeRemaining,
         onPlayerAttack,
+        attackRef,
+        assaultRef,
         assaultStarted
     }) => (
         <div className='controlPanel'>
-            <ShotButton isReloading={isReloading} isCastleCaptured={isCastleCaptured} handleClick={onPlayerAttack} />
+            <ShotButton
+                reloadTime={reloadTime}
+                reloadTimeRemaining={reloadTimeRemaining}
+                buttonRef={attackRef}
+                isReloading={isReloading}
+                isCastleCaptured={isCastleCaptured}
+                handleClick={onPlayerAttack} />
             <AssaultButton
                 isCastleCaptured={isCastleCaptured}
+                buttonRef={assaultRef}
                 isAssault={isAssault}
                 playerUnits={playerUnits}
                 assaultStarted={assaultStarted}

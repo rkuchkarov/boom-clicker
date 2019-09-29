@@ -1,33 +1,48 @@
 const LEVELS = {
     1: {
-        health: 50,
-        fullHealth: 50,
-        restore: 0,
-        assaultDefense: 0
+        castle: {
+            health: 50,
+            fullHealth: 50,
+            restore: 0,
+            assaultDefense: 0
+        },
+        isTraining: true
     },
     2: {
-        health: 75,
-        fullHealth: 75,
-        restore: 0,
-        assaultDefense: 1
+        castle: {
+            health: 75,
+            fullHealth: 75,
+            restore: 0,
+            assaultDefense: 1
+        },
+        isTraining: true
     },
     3: {
-        health: 100,
-        fullHealth: 100,
-        restore: 0,
-        assaultDefense: 1
+        castle: {
+            health: 100,
+            fullHealth: 100,
+            restore: 0,
+            assaultDefense: 1
+        },
+        isTraining: true
     },
     4: {
-        health: 125,
-        fullHealth: 125,
-        restore: 0.5,
-        assaultDefense: 1
+        castle: {
+            health: 125,
+            fullHealth: 125,
+            restore: 0.5,
+            assaultDefense: 1
+        },
+        isTraining: true
     },
     5: {
-        health: 200,
-        fullHealth: 200,
-        restore: 0.5,
-        assaultDefense: 1
+        castle: {
+            health: 200,
+            fullHealth: 200,
+            restore: 0.5,
+            assaultDefense: 1
+        },
+        isTraining: true
     }
 };
 
@@ -36,7 +51,7 @@ const PLAYER_LEVELS = {
         damage: 10,
         criticalChance: 0,
         criticalDamage: 200,
-        reloadTime: 10,
+        reloadTime: 10000,
         assaultUnits: 10,
         assaultUnitDamage: 0.5
     },
@@ -44,7 +59,7 @@ const PLAYER_LEVELS = {
         damage: 12,
         criticalChance: 0,
         criticalDamage: 200,
-        reloadTime: 10,
+        reloadTime: 10000,
         assaultUnits: 10,
         assaultUnitDamage: 0.5
     },
@@ -52,7 +67,7 @@ const PLAYER_LEVELS = {
         damage: 12,
         criticalChance: 0,
         criticalDamage: 200,
-        reloadTime: 8,
+        reloadTime: 8000,
         assaultUnits: 10,
         assaultUnitDamage: 0.5
     },
@@ -60,7 +75,7 @@ const PLAYER_LEVELS = {
         damage: 12,
         criticalChance: 0,
         criticalDamage: 200,
-        reloadTime: 8,
+        reloadTime: 8000,
         assaultUnits: 12,
         assaultUnitDamage: 0.6
     },
@@ -68,7 +83,7 @@ const PLAYER_LEVELS = {
         damage: 12,
         criticalChance: 50,
         criticalDamage: 200,
-        reloadTime: 8,
+        reloadTime: 8000,
         assaultUnits: 12,
         assaultUnitDamage: 0.6
     }

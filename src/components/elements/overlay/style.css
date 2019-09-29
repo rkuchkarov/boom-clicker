@@ -1,0 +1,27 @@
+.overlay {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.hard {
+    opacity: 0.9;
+    animation: fadeinHard 1.5s;
+}
+
+.light {
+    opacity: 0.5;
+    animation: fadeinLight 1.5s;
+}
+
+@keyframes fadeinHard {
+    from { opacity: 0; }
+    to   { opacity: 0.9; }
+}
+
+@keyframes fadeinLight {
+    from { opacity: 0; }
+    to   { opacity: 0.5; }
+}

@@ -1,14 +1,17 @@
 export const RESET_STATE = 'RESET_STATE';
+export const TRAINING_STARTED = 'TRAINING_STARTED';
+export const TRAINING_FINISHED = 'TRAINING_FINISHED';
 export const BATTLE_PREPARE = 'BATTLE_PREPARE';
 export const BATTLE_START = 'BATTLE_START';
-export const BATTLE_END = 'BATTLE_END';
+export const BATTLE_FINISHED = 'BATTLE_FINISHED';
 export const LEVEL_FETCH = 'LEVEL_FETCH';
 export const LEVEL_LOADED = 'LEVEL_LOADED';
 export const PLAYER_FETCH = 'PLAYER_FETCH';
 export const PLAYER_LOADED = 'PLAYER_LOADED';
 export const PLAYER_ATTACK = 'PLAYER_ATTACK';
+export const ASSAULT_ATTACK = 'ASSAULT_ATTACK';
 export const PLAYER_RELOADING = 'PLAYER_RELOADING';
-export const RELOAD_SEC_PASSED = 'RELOAD_SEC_PASSED';
+export const RELOAD_TICK_PASSED = 'RELOAD_TICK_PASSED';
 export const PLAYER_RELOADED = 'PLAYER_RELOADED';
 export const CASTLE_FETCH = 'CASTLE_FETCH';
 export const CASTLE_LOADED = 'CASTLE_LOADED';
@@ -21,10 +24,29 @@ export const ASSAULT_STARTED = 'ASSAULT_STARTED';
 export const ASSAULT_SEC_PASSED = 'ASSAULT_SEC_PASSED';
 export const ASSAULT_FINISHED = 'ASSAULT_FINISHED';
 export const REWARD_LOADED = 'REWARD_LOADED';
+export const BATTLE_SEC_PASSED = 'BATTLE_SEC_PASSED';
 
 export const resetState = () => {
     return {
         type: RESET_STATE
+    }
+};
+
+export const battleSecPassed = () => {
+    return {
+        type: BATTLE_SEC_PASSED
+    }
+};
+
+export const trainingStarted = () => {
+    return {
+        type: TRAINING_STARTED
+    }
+};
+
+export const trainingFinished = () => {
+    return {
+        type: TRAINING_FINISHED
     }
 };
 
@@ -40,9 +62,9 @@ export const battleStart = () => {
     }
 };
 
-export const battleEnd = () => {
+export const battleFinished = () => {
     return {
-        type: BATTLE_END
+        type: BATTLE_FINISHED
     }
 };
 
@@ -78,9 +100,9 @@ export const playerReloading = () => {
     }
 };
 
-export const reloadSecPassed =() => {
+export const reloadTickPassed =() => {
     return {
-        type: RELOAD_SEC_PASSED
+        type: RELOAD_TICK_PASSED
     }
 };
 
@@ -90,9 +112,17 @@ export const playerReloaded = () => {
     }
 };
 
-export const playerAttack = () => {
+export const assaultAttack = (damage) => {
     return {
-        type: PLAYER_ATTACK
+        type: ASSAULT_ATTACK,
+        damage
+    }
+};
+
+export const playerAttack = (damage) => {
+    return {
+        type: PLAYER_ATTACK,
+        damage
     }
 };
 
@@ -109,10 +139,11 @@ export const castleLoaded = (castle) => {
     }
 };
 
-export const castleDamaged = (damage) => {
+export const castleDamaged = (damage, source) => {
     return {
         type: CASTLE_DAMAGED,
-        damage
+        damage,
+        source
     }
 };
 

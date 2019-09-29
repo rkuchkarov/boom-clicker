@@ -1,16 +1,22 @@
-.button {
+.nextButton {
     display: flex;
-    width: 220px;
     align-items: center;
     justify-content: center;
     height: 40px;
     cursor: pointer;
     align-self: flex-end;
-    margin-top: 20px;
+    user-select: none;
 }
 
-.label {
+.buttonLabel {
+    color: #000a12;
     font-weight: bold;
+    box-sizing: border-box;
+    height: 25px;
+}
+
+.buttonHovered {
+    border-bottom: solid;
 }
 
 .arrow {

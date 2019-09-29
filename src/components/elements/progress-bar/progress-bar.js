@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.css'
-import {getPercentage} from "../../utils/percent";
+import {getPercentage} from "../../../utils/percent";
 
 export default class ProgressBar extends Component {
     constructor(props) {
@@ -33,6 +33,7 @@ export default class ProgressBar extends Component {
         } else if (type === 'valueWithMax') {
             barValue = `${value}/${maxValue}`;
         }
+        else barValue = '';
         return (
             <div  className={`progress-bar ${ className }` }>
                 <div className="filler" style={{ width: `${percentage}%` }}/>

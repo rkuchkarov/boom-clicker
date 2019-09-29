@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import icon from "./icon.png";
 import './style.css';
 
 const NextLevelButton = ({ handleClick }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
     return (
-        <div className="button" onClick={handleClick}>
-            <div className="label">
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="nextButton" onClick={handleClick}>
+            <div className={`buttonLabel${isHovered ? ' buttonHovered' : ''}`}>
             Next level
             </div>
             <img

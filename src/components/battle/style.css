@@ -2,3 +2,10 @@
     max-width: 700px;
     margin: 0 auto;
 }
+
+.timer {
+    position: absolute;
+    right: 35px;
+    font-size: 24px;
+    font-weight: bold;
+}

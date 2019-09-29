@@ -1,31 +1,15 @@
-import { delay, cancel, take, takeLatest, call, put, fork, select, takeEvery } from 'redux-saga/effects'
+import { cancel, take, takeLatest, put, fork, select, takeEvery } from 'redux-saga/effects'
 import _ from 'lodash';
 import * as A from '../actions';
 import * as selectors from "../selectors/selectors";
 import {increaseNumByPercentage} from "../utils/percent";
-
-const ONE_SECOND = 1000;
-
-function* tickTask(tickSaga) {
-    while (true) {
-        yield call(tickSaga);
-        yield delay(ONE_SECOND)
-    }
-}
-
-function* timerTask(startAction, endAction, tickSaga) {
-    while(true) {
-        yield take(startAction);
-        const task = yield fork(tickTask, tickSaga);
-        yield take(endAction);
-        yield cancel(task)
-    }
-}
+import {TICK_TIME_MS, TICK_TIME_SEC, tickTask, timerTask} from "./timer";
 
 function* assaultTick() {
     const playerUnitDamage = yield select(selectors.getPlayerUnitDamage);
     const playerUnits = yield select(selectors.getPlayerUnits);
-    yield put(A.castleDamaged(playerUnitDamage * playerUnits));
+    const assaultDamage = _.round(playerUnitDamage * playerUnits, 1);
+    yield put(A.castleDamaged(assaultDamage, 'assault'));
     yield put(A.castleAssaultRebuff());
     yield put(A.assaultSecPassed());
     const captured = yield select(selectors.getIsCastleCaptured);
@@ -39,8 +23,8 @@ function* reloadGunTick() {
     const captured = yield select(selectors.getIsCastleCaptured);
     const reloadTimeRemaining = yield select(selectors.getPlayerReloadTimeRemaining);
 
-    yield put(A.reloadSecPassed());
-    if (reloadTimeRemaining <= 1 || captured) {
+    yield put(A.reloadTickPassed());
+    if (reloadTimeRemaining <= 100 || captured) {
         yield put(A.playerReloaded());
     }
 }
@@ -69,7 +53,7 @@ function* playerAttackSaga() {
 
     const isCriticalHit = _.random(1, 100) <= playerCriticalChance;
     const finalDamage = isCriticalHit ? increaseNumByPercentage(playerDamage, playerCriticalDamage) : playerDamage;
-    yield put(A.castleDamaged(finalDamage));
+    yield put(A.castleDamaged(finalDamage, 'player'));
     yield put(A.playerReloading());
 }
 
@@ -78,19 +62,28 @@ function* assaultSaga() {
 }
 
 function* reloadSaga() {
-    yield fork(timerTask, A.PLAYER_RELOADING, A.PLAYER_RELOADED, reloadGunTick);
+    yield fork(timerTask, A.PLAYER_RELOADING, A.PLAYER_RELOADED, reloadGunTick, TICK_TIME_MS);
 }
 
 function* restoreCastleSaga() {
     while(true) {
         yield take(A.CASTLE_DAMAGED);
-        const task = yield fork(tickTask, restoreCastleTick);
+        const task = yield fork(tickTask, restoreCastleTick, TICK_TIME_SEC);
         yield take([A.CASTLE_CAPTURED, A.CASTLE_RESTORED]);
         yield cancel(task)
     }
 }
 
+function* battleTimeTick() {
+    yield put(A.battleSecPassed());
+}
+
+function* battleTimeSaga() {
+    yield fork(timerTask, A.BATTLE_START, A.BATTLE_FINISHED, battleTimeTick, TICK_TIME_SEC);
+}
+
 export default function* battleSaga() {
+    yield fork(battleTimeSaga);
     yield fork(assaultSaga);
     yield fork(reloadSaga);
     yield fork(restoreCastleSaga);
