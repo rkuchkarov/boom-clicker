@@ -13,7 +13,9 @@ export const getPlayerDamage = (state) => _.round(_.get(state, 'player.damage'),
 export const getPlayerCriticalChance = (state) => _.round(_.get(state, 'player.criticalChance'), 1);
 export const getPlayerCriticalDamage = (state) => _.round(_.get(state, 'player.criticalDamage'), 1);
 export const getPlayerUnitDamage = (state) => _.round(_.get(state, 'player.assaultUnitDamage'), 1);
-export const getPlayerUnits = (state) => _.get(state, 'player.assaultUnits');
+export const getPlayerUnits = (state) => Math.floor(_.get(state, 'player.assaultUnits'));
+export const getAssaultUnits = (state) => _.round(_.get(state, 'player.assaultUnits'), 1);
+export const getFullAssaultUnits = (state) => _.round(_.get(state, 'player.fullAssaultUnits'));
 export const getPlayerReloadTime = (state) => _.get(state, 'player.reloadTime');
 export const getPlayerReloadTimeRemaining = (state) => _.get(state, 'player.reloadTimeRemaining');
 export const getIsPlayerReloading = (state) => _.get(state, 'player.isReloading');
@@ -21,3 +23,4 @@ export const getIsAssault = (state) => _.get(state, 'player.isAssault');
 export const getReward = (state) => _.get(state, 'reward');
 export const getTotalPlayerDamage = (state) => _.round(_.get(state, 'totalPlayerDamage'), 1);
 export const getTotalUnitsDamage = (state) => _.round(_.get(state, 'totalUnitsDamage'), 1);
+export const getAssaultUnitsRestore = (state) => _.round(_.get(state, 'player.assaultUnitsRestore'), 1);

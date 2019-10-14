@@ -39,6 +39,16 @@ function* restoreCastleTick() {
     }
 }
 
+function* restoreUnitsTick() {
+    const unitsRestore = yield select(selectors.getAssaultUnitsRestore);
+    yield put(A.assaultUnitsRestore(unitsRestore));
+    const assaultUnits = yield select(selectors.getAssaultUnits);
+    const fullAssaultUnits = yield select(selectors.getFullAssaultUnits);
+    if (assaultUnits === fullAssaultUnits) {
+        yield put(A.assaultUnitsRestored());
+    }
+}
+
 function* castleDamageSaga() {
     const castleHealth = yield select(selectors.getCastleHealth);
     if (castleHealth <= 0) {
@@ -74,6 +84,15 @@ function* restoreCastleSaga() {
     }
 }
 
+function* restoreUnitsSaga() {
+    while(true) {
+        yield take(A.ASSAULT_FINISHED);
+        const task = yield fork(tickTask, restoreUnitsTick, TICK_TIME_SEC, true);
+        yield take([A.BATTLE_FINISHED, A.ASSAULT_UNITS_RESTORED, A.ASSAULT_STARTED]);
+        yield cancel(task)
+    }
+}
+
 function* battleTimeTick() {
     yield put(A.battleSecPassed());
 }
@@ -87,6 +106,7 @@ export default function* battleSaga() {
     yield fork(assaultSaga);
     yield fork(reloadSaga);
     yield fork(restoreCastleSaga);
+    yield fork(restoreUnitsSaga);
     yield takeLatest(A.CASTLE_DAMAGED, castleDamageSaga);
     yield takeEvery(A.PLAYER_ATTACK, playerAttackSaga)
 }

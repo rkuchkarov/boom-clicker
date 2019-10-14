@@ -53,6 +53,8 @@ const PLAYER_LEVELS = {
         criticalDamage: 200,
         reloadTime: 10000,
         assaultUnits: 10,
+        fullAssaultUnits: 10,
+        assaultUnitsRestore: 0,
         assaultUnitDamage: 0.5
     },
     2: {
@@ -61,7 +63,9 @@ const PLAYER_LEVELS = {
         criticalDamage: 200,
         reloadTime: 10000,
         assaultUnits: 10,
-        assaultUnitDamage: 0.5
+        assaultUnitDamage: 0.5,
+        fullAssaultUnits: 10,
+        assaultUnitsRestore: 1
     },
     3: {
         damage: 12,
@@ -69,7 +73,9 @@ const PLAYER_LEVELS = {
         criticalDamage: 200,
         reloadTime: 8000,
         assaultUnits: 10,
-        assaultUnitDamage: 0.5
+        assaultUnitDamage: 0.5,
+        fullAssaultUnits: 10,
+        assaultUnitsRestore: 1
     },
     4: {
         damage: 12,
@@ -77,7 +83,9 @@ const PLAYER_LEVELS = {
         criticalDamage: 200,
         reloadTime: 8000,
         assaultUnits: 12,
-        assaultUnitDamage: 0.6
+        assaultUnitDamage: 0.6,
+        fullAssaultUnits: 10,
+        assaultUnitsRestore: 1
     },
     5: {
         damage: 12,
@@ -85,7 +93,9 @@ const PLAYER_LEVELS = {
         criticalDamage: 200,
         reloadTime: 8000,
         assaultUnits: 12,
-        assaultUnitDamage: 0.6
+        assaultUnitDamage: 0.6,
+        fullAssaultUnits: 10,
+        assaultUnitsRestore: 1
     }
 };
 

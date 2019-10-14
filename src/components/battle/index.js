@@ -51,14 +51,16 @@ const Battle = (
                 />}
             <div className={"wrapper"}>
                 <div className={"timer"}>{battleTime}</div>
-                <InfoBlock level={level} />
-                <Castle
-                    ref={castleRef}
-                    isPlayerReloading={isReloading}
-                    isCastleCaptured={isCastleCaptured}
-                    health={castleHealth}
-                    fullHealth={castleFullHealth}
-                />
+                <div className={"levelBlock"}>
+                    <InfoBlock level={level} />
+                    <Castle
+                        ref={castleRef}
+                        isPlayerReloading={isReloading}
+                        isCastleCaptured={isCastleCaptured}
+                        health={castleHealth}
+                        fullHealth={castleFullHealth}
+                    />
+                </div>
                 <Player
                     level={level}
                     playerDamage={playerDamage}

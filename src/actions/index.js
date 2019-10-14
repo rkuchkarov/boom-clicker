@@ -20,11 +20,26 @@ export const CASTLE_CAPTURED = 'CASTLE_CAPTURED';
 export const CASTLE_RESTORE = 'CASTLE_RESTORE';
 export const CASTLE_RESTORED = 'CASTLE_RESTORED';
 export const CASTLE_ASSAULT_REBUFF = 'CASTLE_ASSAULT_REBUFF';
+export const ASSAULT_UNITS_RESTORED = 'ASSAULT_UNITS_RESTORED';
+export const ASSAULT_UNITS_RESTORE = 'ASSAULT_UNITS_RESTORE';
 export const ASSAULT_STARTED = 'ASSAULT_STARTED';
 export const ASSAULT_SEC_PASSED = 'ASSAULT_SEC_PASSED';
 export const ASSAULT_FINISHED = 'ASSAULT_FINISHED';
 export const REWARD_LOADED = 'REWARD_LOADED';
 export const BATTLE_SEC_PASSED = 'BATTLE_SEC_PASSED';
+
+export const assaultUnitsRestored = () => {
+    return {
+        type: ASSAULT_UNITS_RESTORED
+    }
+};
+
+export const assaultUnitsRestore = (unitsRestore) => {
+    return {
+        type: ASSAULT_UNITS_RESTORE,
+        unitsRestore
+    }
+};
 
 export const resetState = () => {
     return {
