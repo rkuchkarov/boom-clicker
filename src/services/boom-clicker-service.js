@@ -84,7 +84,7 @@ const PLAYER_LEVELS = {
         reloadTime: 8000,
         assaultUnits: 12,
         assaultUnitDamage: 0.6,
-        fullAssaultUnits: 10,
+        fullAssaultUnits: 12,
         assaultUnitsRestore: 1
     },
     5: {
@@ -94,7 +94,7 @@ const PLAYER_LEVELS = {
         reloadTime: 8000,
         assaultUnits: 12,
         assaultUnitDamage: 0.6,
-        fullAssaultUnits: 10,
+        fullAssaultUnits: 12,
         assaultUnitsRestore: 1
     }
 };
