@@ -16,7 +16,9 @@ const initialState = {
         reloadTime: 10,
         reloadTimeRemaining: 0,
         isReloading: false,
+        assaultUnitsRestore: 1,
         assaultUnits: 10,
+        fullAssaultUnits: 10,
         assaultUnitDamage: 0.5,
         isAssault: false
     },
@@ -203,6 +205,17 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isTraining: false
+            };
+
+        case A.ASSAULT_UNITS_RESTORE:
+            const newAssaultUnits = state.player.assaultUnits  + action.unitsRestore;
+
+            return {
+                ...state,
+                player: {
+                    ...state.player,
+                    assaultUnits:  newAssaultUnits > state.player.fullAssaultUnits  ? state.player.fullAssaultUnits : newAssaultUnits
+                }
             };
 
         default:
