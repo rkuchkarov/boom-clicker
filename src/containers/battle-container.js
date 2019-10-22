@@ -4,7 +4,16 @@ import { bindActionCreators } from "redux";
 import * as selectors from "../selectors/selectors";
 import Battle from "../components/battle";
 import Reward from "../components/battle/reward";
-import { assaultStarted, battlePrepare, battleStart, playerAttack, trainingFinished } from "../actions";
+import {
+    assaultStarted,
+    battlePrepare,
+    battleStart,
+    playerAttack, researchClosed,
+    researchOpened,
+    trainingFinished,
+    upgradeBuy
+} from "../actions";
+import Research from "../components/battle/research";
 
 class BattleContainer extends Component {
     constructor(props) {
@@ -16,6 +25,7 @@ class BattleContainer extends Component {
         const {
             isAssault,
             isReloading,
+            isResearch,
             isCastleCaptured,
             isBattleFinished,
             isTraining,
@@ -36,18 +46,36 @@ class BattleContainer extends Component {
             reward,
             totalPlayerDamage,
             totalUnitsDamage,
-            battleTime
+            battleTime,
+            researchOpened,
+            researchClosed,
+            playerGold,
+            playerUpgrades,
+            upgrades,
+            upgradeBuy
         } = this.props;
+
+        const isRewardScreen = isBattleFinished && !isResearch;
 
         return(
             <>
-                { isBattleFinished &&
+                { isRewardScreen &&
                 <Reward
                     totalPlayerDamage={totalPlayerDamage}
                     totalUnitsDamage={totalUnitsDamage}
                     reward={reward} battleTime={battleTime}
                     battlePrepare={battlePrepare}
+                    researchOpened={researchOpened}
                 /> }
+                { isResearch &&
+                    <Research
+                        gold={playerGold}
+                        playerUpgrades={playerUpgrades}
+                        upgrades={upgrades}
+                        upgradeBuy={upgradeBuy}
+                        researchClosed={researchClosed}
+                    />
+                }
                 <Battle
                     battleTime={battleTime}
                     playerUnits={playerUnits}
@@ -76,6 +104,7 @@ class BattleContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         isCastleCaptured: selectors.getIsCastleCaptured(state),
+        isResearch: selectors.getIsResearch(state),
         isReloading: selectors.getIsPlayerReloading(state),
         isAssault: selectors.getIsAssault(state),
         isBattleFinished: selectors.getIsBattleFinished(state),
@@ -92,7 +121,10 @@ const mapStateToProps = (state) => {
         reward: selectors.getReward(state),
         battleTime: selectors.getBattleTime(state),
         totalPlayerDamage: selectors.getTotalPlayerDamage(state),
-        totalUnitsDamage: selectors.getTotalUnitsDamage(state)
+        totalUnitsDamage: selectors.getTotalUnitsDamage(state),
+        playerGold: selectors.getPlayerGold(state),
+        playerUpgrades: selectors.getPlayerUpgrades(state),
+        upgrades: selectors.getUpgrades(state)
     };
 };
 
@@ -102,7 +134,10 @@ const mapDispatchToProps = (dispatch) => {
         battlePrepare,
         playerAttack,
         battleStart,
-        trainingFinished
+        trainingFinished,
+        researchOpened,
+        researchClosed,
+        upgradeBuy
     }, dispatch);
 };
 

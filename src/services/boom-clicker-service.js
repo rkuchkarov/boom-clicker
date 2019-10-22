@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import { decreaseNumByPercentage, increaseNumByPercentage } from "../utils/percent";
 const LEVELS = {
     1: {
         castle: {
@@ -99,8 +101,111 @@ const PLAYER_LEVELS = {
     }
 };
 
+const PLAYER_UPGRADES = {
+    damageIncrease : {
+        1: 20,
+        2: 40,
+        3: 60,
+        4: 80,
+        5: 100
+    },
+    reloadTimeReduce: {
+        1: -10,
+        2: -20,
+        3: -30,
+        4: -40,
+        5: -50
+    },
+    criticalChanceIncrease: {
+        1: 2,
+        2: 4,
+        3: 6,
+        4: 8,
+        5: 10
+    },
+    criticalDamageIncrease: {
+        1: 10,
+        2: 20,
+        3: 30,
+        4: 40,
+        5: 50
+    },
+    assaultUnitDamageIncrease: {
+        1: 20,
+        2: 40,
+        3: 60,
+        4: 80,
+        5: 100
+    },
+    fullAssaultUnitsIncrease: {
+        1: 20,
+        2: 40,
+        3: 60,
+        4: 80,
+        5: 100
+    },
+    assaultUnitsRestoreIncrease: {
+        1: 0.1,
+        2: 0.2,
+        3: 0.3,
+        4: 0.4,
+        5: 0.5
+    }
+};
+
+const UPGRADE_PRICES = {
+    1: 40,
+    2: 50,
+    3: 65,
+    4: 80,
+    5: 100
+};
+
 let currentLevel = 0;
 let currentPlayerLevel = 0;
+let currentGold = 0;
+let currentUpgrades = [];
+
+const getGold = () => currentGold;
+
+export const getUpgrades = () => PLAYER_UPGRADES;
+
+const getCurrentUpgrades = () => currentUpgrades;
+
+const getCurrentUpgradeByName = (name) => _.find(getCurrentUpgrades(), (upgrade) => upgrade.name === name);
+
+const setUpgrade = (name) => {
+    const upgradeIndex = _.findIndex(getCurrentUpgrades(), (upgrade) => upgrade.name === name);
+    if (upgradeIndex >= 0) {
+        const currentUpgradeLevel = getCurrentUpgradeByName(name).level;
+        currentUpgrades[upgradeIndex] = { name, level: currentUpgradeLevel + 1 }
+    } else {
+        currentUpgrades.push({ name, level: 1 });
+    }
+};
+
+const updatePlayerWithUpgradePercentage = (player, playerField, upgradeName, upgradeLevel) => {
+    const upgradeValue = PLAYER_UPGRADES[upgradeName][upgradeLevel];
+    if (upgradeValue > 0) {
+        player[playerField] = player[playerField] + increaseNumByPercentage(player[playerField], upgradeValue);
+    } else {
+        console.log(upgradeValue);
+        player[playerField] = decreaseNumByPercentage(player[playerField], upgradeValue);
+    }
+};
+
+const updatePlayerWithUpgradeValue = (player, playerField, upgradeName, upgradeLevel) => {
+    const upgradeValue = PLAYER_UPGRADES[upgradeName][upgradeLevel];
+    player[playerField] = player[playerField] + upgradeValue;
+};
+
+export const buyUpgrade = (name) => {
+    const currentUpgrade = getCurrentUpgradeByName(name);
+    const price = currentUpgrade ? UPGRADE_PRICES[currentUpgrade.level + 1] : UPGRADE_PRICES[1];
+    currentGold -= price;
+    setUpgrade(name);
+};
+
 export const getLevel = () => {
     currentLevel += 1;
     if (!LEVELS[currentLevel]) {
@@ -113,20 +218,62 @@ export const getCastle = (level) => {
     return LEVELS[level];
 };
 
-export const getPlayer = () => {
+export const upPlayerLevel = () => {
     currentPlayerLevel += 1;
     if (!PLAYER_LEVELS[currentPlayerLevel]) {
         currentPlayerLevel = 1;
     }
-    return {
-        ...PLAYER_LEVELS[currentPlayerLevel],
-        level: currentPlayerLevel
-    }
 };
 
-export const getReward = () => (
-    {
-        gold: 200,
-        science: 3
-}
-);
+export const getPlayer = () => {
+    console.log(currentPlayerLevel);
+    const PLAYER = {
+        ...PLAYER_LEVELS[currentPlayerLevel],
+        level: currentPlayerLevel,
+        gold: getGold(),
+        upgrades: getCurrentUpgrades()
+    };
+
+    if (currentUpgrades) {
+        currentUpgrades.forEach((upgrade) => {
+            switch (upgrade.name) {
+                case 'damageIncrease':
+                    updatePlayerWithUpgradePercentage(PLAYER, 'damage', upgrade.name, upgrade.level);
+                    break;
+                case 'reloadTimeReduce':
+                    updatePlayerWithUpgradePercentage(PLAYER, 'reloadTime', upgrade.name, upgrade.level);
+                    break;
+                case 'criticalChanceIncrease':
+                    updatePlayerWithUpgradeValue(PLAYER, 'criticalChance', upgrade.name, upgrade.level);
+                    break;
+                case 'criticalDamageIncrease':
+                    updatePlayerWithUpgradePercentage(PLAYER, 'criticalDamage', upgrade.name, upgrade.level);
+                    break;
+                case 'assaultUnitDamageIncrease':
+                    updatePlayerWithUpgradePercentage(PLAYER, 'assaultUnitDamage', upgrade.name, upgrade.level);
+                    break;
+                case 'fullAssaultUnitsIncrease':
+                    updatePlayerWithUpgradePercentage(PLAYER, 'assaultUnits', upgrade.name, upgrade.level);
+                    updatePlayerWithUpgradePercentage(PLAYER, 'fullAssaultUnits', upgrade.name, upgrade.level);
+                    break;
+                case 'assaultUnitsRestoreIncrease':
+                    updatePlayerWithUpgradeValue(PLAYER, 'assaultUnitsRestore', upgrade.name, upgrade.level);
+                    break;
+                default:
+                    return;
+            }
+        })
+    }
+
+    return PLAYER;
+};
+
+export const getReward = () => {
+    const rewardGold = 20;
+    currentGold += rewardGold;
+    return (
+        {
+            gold: rewardGold
+        }
+    );
+};

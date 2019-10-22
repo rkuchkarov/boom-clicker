@@ -1,0 +1,41 @@
+.upgradeWrapper {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border: solid;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.upgradeRow {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.upgradeName {
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.buyButton {
+    border: solid 1px;
+    padding: 3px;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.buyButton:hover {
+    background-color: #d0891a;
+}
+
+.levelDescription {
+    padding-right: 3px;
+    font-weight: bold;
+}
+
+.notCurrent {
+    font-weight: normal;
+    opacity: 0.4;
+}

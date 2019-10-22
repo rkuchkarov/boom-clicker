@@ -23,6 +23,14 @@ function* fetchCastle() {
     }
 }
 
+function* upPlayerLevel() {
+    try {
+        yield call(service.upPlayerLevel);
+    } catch (e) {
+        console.log('error', e);
+    }
+}
+
 function* fetchPlayer() {
     try {
         const player = yield call(service.getPlayer);
@@ -43,11 +51,34 @@ function* fetchReward() {
     }
 }
 
+function* fetchUpgrades() {
+    try {
+        const upgrades = yield call(service.getUpgrades);
+        yield put(A.upgradesLoaded(upgrades));
+        yield put(A.playerFetch());
+    } catch (e) {
+        console.log('error', e);
+    }
+}
+
+function* buyUpgrade(action) {
+    try {
+        yield call(service.buyUpgrade, action.name);
+        const player = yield call(service.getPlayer);
+        yield put(A.playerLoaded(player));
+    } catch (e) {
+        console.log('error', e);
+    }
+}
+
 function* watchBattlePage() {
     yield takeLatest(A.LEVEL_FETCH, fetchLevel);
     yield takeLatest(A.PLAYER_FETCH, fetchPlayer);
+    yield takeLatest(A.PLAYER_UP_LEVEL, upPlayerLevel);
     yield takeLatest(A.CASTLE_FETCH, fetchCastle);
     yield takeLatest(A.CASTLE_CAPTURED, fetchReward);
+    yield takeLatest(A.UPGRADE_BUY, buyUpgrade);
+    yield takeLatest(A.RESEARCH_OPENED, fetchUpgrades);
 }
 
 export default function* battlePageSaga() {
@@ -60,5 +91,6 @@ function* battlePageFlow() {
     yield put(A.resetState());
     yield put(A.levelFetch());
     yield put(A.castleFetch());
+    yield put(A.upPlayerLevel());
     yield put(A.playerFetch());
 }
