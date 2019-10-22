@@ -13,14 +13,16 @@ const initialState = {
         criticalChance: 0,
         criticalDamage: 200,
         damage: 10,
-        reloadTime: 10,
+        reloadTime: 10000,
         reloadTimeRemaining: 0,
         isReloading: false,
         assaultUnitsRestore: 1,
         assaultUnits: 10,
         fullAssaultUnits: 10,
         assaultUnitDamage: 0.5,
-        isAssault: false
+        isAssault: false,
+        gold: 0,
+        upgrades: []
     },
     reward: {
         gold: 0,
@@ -29,12 +31,14 @@ const initialState = {
     battleTime: 0,
     isBattleFinished: false,
     isTraining: false,
+    isResearchScreen: false,
     isPlayerLoading: false,
     isCastleCaptured: false,
     isCastleFetching: false,
     isLevelFetching: false,
     totalPlayerDamage: 0,
-    totalUnitsDamage: 0
+    totalUnitsDamage: 0,
+    upgrades: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +47,24 @@ const reducer = (state = initialState, action) => {
 
         case A.RESET_STATE:
             return initialState;
+
+        case A.UPGRADES_LOADED:
+            return {
+                ...state,
+                upgrades: action.upgrades
+            };
+
+        case A.RESEARCH_OPENED:
+            return {
+                ...state,
+                isResearchScreen: true
+            };
+
+        case A.RESEARCH_CLOSED:
+            return {
+                ...state,
+                isResearchScreen: false
+            };
 
         case A.BATTLE_SEC_PASSED:
             return {

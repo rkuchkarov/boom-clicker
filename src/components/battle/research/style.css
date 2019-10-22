@@ -1,0 +1,65 @@
+.researchWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    box-shadow: 0 0 4px #333333;
+}
+
+.researchTitle {
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 29px;
+}
+
+.researchDescription {
+    font-size: 18px;
+}
+
+.researchCurrentGold {
+    font-size: 18px;
+    text-align: center;
+    padding-bottom: 17px;
+}
+
+.closeResearch {
+    align-self: flex-end;
+    padding-right: 13px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.researchBlock {
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+    background-color: #ffa726;
+    align-items: center;
+    width: 485px;
+    height: 603px;
+    z-index: 1;
+    padding: 22px;
+    box-sizing: border-box;
+    animation: fadein .8s;
+    cursor: default;
+}
+
+.upgradesList {
+    overflow: scroll;
+}
+
+.upgradesList::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.researchSummary {
+    font-size: 18px;
+}
