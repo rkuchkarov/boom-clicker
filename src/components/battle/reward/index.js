@@ -18,8 +18,9 @@ const Reward = ({ reward: { gold, science }, battleTime, totalPlayerDamage, tota
                     <div className={"rewardAssaultDamage"}>Total assault damage: {totalUnitsDamage}</div>
                     <div className={"rewardTime"}>Time spend: {battleTime}</div>
                 </div>
-                <div onClick={researchOpened}>Улучшалки</div>
-                <NextLevelButton handleClick={battlePrepare} />
+                <div className={'rewardFooter'}>
+                    <div className={'openResearch'} onClick={researchOpened}>Перейти к исследованиям</div>
+                    <NextLevelButton handleClick={battlePrepare} /></div>
             </div>
         </div>
     </>

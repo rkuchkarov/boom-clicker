@@ -26,8 +26,13 @@
     user-select: none;
 }
 
-.buyButton:hover {
+.buyButton:not(.buyNotAvailable):hover {
     background-color: #d0891a;
+}
+
+.buyNotAvailable {
+    cursor: default;
+    opacity: 0.3;
 }
 
 .levelDescription {

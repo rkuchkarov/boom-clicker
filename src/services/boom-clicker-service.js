@@ -8,7 +8,7 @@ const LEVELS = {
             restore: 0,
             assaultDefense: 0
         },
-        isTraining: true
+        isTraining: false
     },
     2: {
         castle: {
@@ -17,7 +17,7 @@ const LEVELS = {
             restore: 0,
             assaultDefense: 1
         },
-        isTraining: true
+        isTraining: false
     },
     3: {
         castle: {
@@ -26,7 +26,7 @@ const LEVELS = {
             restore: 0,
             assaultDefense: 1
         },
-        isTraining: true
+        isTraining: false
     },
     4: {
         castle: {
@@ -35,7 +35,7 @@ const LEVELS = {
             restore: 0.5,
             assaultDefense: 1
         },
-        isTraining: true
+        isTraining: false
     },
     5: {
         castle: {
@@ -44,7 +44,7 @@ const LEVELS = {
             restore: 0.5,
             assaultDefense: 1
         },
-        isTraining: true
+        isTraining: false
     }
 };
 
@@ -153,7 +153,7 @@ const PLAYER_UPGRADES = {
     }
 };
 
-const UPGRADE_PRICES = {
+export const UPGRADE_PRICES = {
     1: 40,
     2: 50,
     3: 65,
@@ -162,7 +162,7 @@ const UPGRADE_PRICES = {
 };
 
 let currentLevel = 0;
-let currentPlayerLevel = 0;
+let currentPlayerLevel = 1;
 let currentGold = 0;
 let currentUpgrades = [];
 
@@ -206,12 +206,36 @@ export const buyUpgrade = (name) => {
     setUpgrade(name);
 };
 
+export const getGeneratedLevel = () => {
+    currentLevel += 1;
+    return currentLevel;
+};
+
+
 export const getLevel = () => {
     currentLevel += 1;
     if (!LEVELS[currentLevel]) {
         currentLevel = 1
     }
     return currentLevel;
+};
+
+export const getGeneratedCastle = () => {
+    const castle = {
+        castle: {
+            health: 50,
+            fullHealth: 50,
+            restore: 0,
+            assaultDefense: 0
+        },
+        isTraining: false
+    };
+    currentUpgrades.forEach(( upgrade ) => {
+        const newCastleHealth = castle.castle.health + (upgrade.level * 20);
+        castle.castle.health = newCastleHealth;
+        castle.castle.fullHealth = newCastleHealth;
+    });
+    return castle;
 };
 
 export const getCastle = (level) => {
