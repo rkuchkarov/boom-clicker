@@ -10,7 +10,7 @@ const UpgradeSection = ({ gold, name, upgrades, upgradeBuy, currentUpgrade }) =>
 
     const currentLevel = currentUpgrade ? currentUpgrade.level : 0;
     let price = null;
-    if ((currentLevel + 1) < 5) {
+    if ((currentLevel + 1) <= 5) {
         price = UPGRADE_PRICES[currentLevel + 1];
     }
 
