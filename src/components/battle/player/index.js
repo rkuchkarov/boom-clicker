@@ -13,7 +13,7 @@ const Player = (
     }) => (
     <div className={'player'}>
         <div ref={infoRef} className={'playerInfo'}>
-            <div>Player lvl: {level}</div>
+            {/*<div>Player lvl: {level}</div>*/}
             <div>Player dmg: {playerDamage}</div>
             <div>Player critical chance: {playerCriticalChance}%</div>
             <div>Player units: {playerUnits} ({_.round(playerUnits * playerUnitDamage)} DPS)</div>

@@ -12,11 +12,11 @@ const Research = ({ gold, upgrades, playerUpgrades, upgradeBuy, researchClosed }
             <div className={"researchWrapper"}>
                 <div className={"researchBlock"}>
                     <div className={'closeResearch'} onClick={researchClosed}>Закрыть</div>
-                    <div className={"researchCurrentGold"}>Current gold: {gold}</div>
+                    <div className={"researchCurrentGold"}>Current gold: <b>{gold}</b></div>
                     <div className={'upgradesList'}>
                         { upgradesMapped.map(({ name, upgrades }) => {
                             const currentUpgrade = _.findLast(playerUpgrades, (upgrade) => upgrade.name === name);
-                            return (<UpgradeSection name={name} upgrades={upgrades} upgradeBuy={upgradeBuy} currentUpgrade={currentUpgrade} />)
+                            return (<UpgradeSection gold={gold} name={name} upgrades={upgrades} upgradeBuy={upgradeBuy} currentUpgrade={currentUpgrade} />)
                         })}
                     </div>
                 </div>

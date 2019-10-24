@@ -44,6 +44,23 @@
     font-style: italic;
 }
 
+.openResearch {
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: solid #ffa726;
+    padding-top: 2px;
+    margin-right: 46px;
+}
+
+.openResearch:hover {
+    border-bottom: solid;
+}
+
+.rewardFooter {
+    display: flex;
+    align-items: center;
+}
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }

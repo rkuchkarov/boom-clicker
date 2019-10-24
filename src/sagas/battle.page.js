@@ -6,7 +6,7 @@ import battleSaga from "./battle";
 
 function* fetchLevel() {
     try {
-        const level = yield call(service.getLevel);
+        const level = yield call(service.getGeneratedLevel);
         yield put(A.levelLoaded(level));
     } catch (e) {
         console.log('error', e);
@@ -16,7 +16,7 @@ function* fetchLevel() {
 function* fetchCastle() {
     try {
         const level = yield select(getLevel);
-        const castle = yield call(service.getCastle, level);
+        const castle = yield call(service.getGeneratedCastle, level);
         yield put(A.castleLoaded(castle));
     } catch (e) {
         console.log('error', e);
@@ -91,6 +91,7 @@ function* battlePageFlow() {
     yield put(A.resetState());
     yield put(A.levelFetch());
     yield put(A.castleFetch());
-    yield put(A.upPlayerLevel());
+    // yield put(A.upPlayerLevel());
     yield put(A.playerFetch());
+    yield put(A.battleStart());
 }
