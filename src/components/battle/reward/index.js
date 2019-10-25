@@ -8,18 +8,18 @@ const Reward = ({ reward: { gold, science }, battleTime, totalPlayerDamage, tota
         <Overlay type={'hard'} />
         <div className={"rewardWrapper"}>
             <div className={"rewardBlock"}>
-                <div className={"rewardTitle"}>Congratulations!</div>
-                <div className={"rewardDescription"}>You earned:
-                    { gold && <div className={"rewardItem"}>{gold} gold</div> }
-                    { science && <div className={"rewardItem"}>{science} science</div> }
+                <div className={"rewardTitle"}>Победа!</div>
+                <div className={"rewardDescription"}>Получено:
+                    { gold && <div className={"rewardItem"}>{gold} золота</div> }
+                    { science && <div className={"rewardItem"}>{science} науки</div> }
                 </div>
                 <div className={"rewardSummary"}>
-                    <div className={"rewardPlayerDamage"}>Total player damage: {totalPlayerDamage}</div>
-                    <div className={"rewardAssaultDamage"}>Total assault damage: {totalUnitsDamage}</div>
-                    <div className={"rewardTime"}>Time spend: {battleTime}</div>
+                    <div className={"rewardPlayerDamage"}>Урона от игрока: {totalPlayerDamage}</div>
+                    <div className={"rewardAssaultDamage"}>Урона от юнитов: {totalUnitsDamage}</div>
+                    <div className={"rewardTime"}>Времени потрачено: {battleTime}</div>
                 </div>
                 <div className={'rewardFooter'}>
-                    <div className={'openResearch'} onClick={researchOpened}>Перейти к исследованиям</div>
+                    <div className={'openResearch'} onClick={researchOpened}>Исследования</div>
                     <NextLevelButton handleClick={battlePrepare} /></div>
             </div>
         </div>

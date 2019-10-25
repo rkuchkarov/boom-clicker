@@ -24,6 +24,7 @@
     border-radius: 6px;
     cursor: pointer;
     user-select: none;
+    margin-left: 8px;
 }
 
 .buyButton:not(.buyNotAvailable):hover {
@@ -36,7 +37,7 @@
 }
 
 .levelDescription {
-    padding-right: 3px;
+    padding-right: 8px;
     font-weight: bold;
 }
 

@@ -27,9 +27,14 @@
 
 .closeResearch {
     align-self: flex-end;
-    padding-right: 13px;
+    margin-right: 13px;
     cursor: pointer;
     font-weight: bold;
+    border-bottom: solid #ffa726;
+}
+
+.closeResearch:hover {
+    border-bottom: solid;
 }
 
 .researchBlock {
@@ -38,7 +43,7 @@
     border-radius: 7px;
     background-color: #ffa726;
     align-items: center;
-    width: 545px;
+    width: 600px;
     height: 622px;
     z-index: 1;
     padding: 22px;

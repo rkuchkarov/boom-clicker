@@ -31,8 +31,8 @@
     border-radius: 7px;
     background-color: #ffa726;
     align-items: center;
-    width: 433px;
-    height: 300px;
+    width: 500px;
+    height: 316px;
     z-index: 1;
     padding: 22px;
     box-sizing: border-box;
@@ -49,7 +49,7 @@
     cursor: pointer;
     border-bottom: solid #ffa726;
     padding-top: 2px;
-    margin-right: 46px;
+    margin-right: 88px;
 }
 
 .openResearch:hover {

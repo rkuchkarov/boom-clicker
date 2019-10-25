@@ -14,9 +14,9 @@ const Player = (
     <div className={'player'}>
         <div ref={infoRef} className={'playerInfo'}>
             {/*<div>Player lvl: {level}</div>*/}
-            <div>Player dmg: {playerDamage}</div>
-            <div>Player critical chance: {playerCriticalChance}%</div>
-            <div>Player units: {playerUnits} ({_.round(playerUnits * playerUnitDamage)} DPS)</div>
+            <div>Урон от пушки: {playerDamage}</div>
+            <div>Шанс крита: {playerCriticalChance}%</div>
+            <div>Количество юнитов: {playerUnits} ({_.round(playerUnits * playerUnitDamage, 1)} DPS)</div>
         </div>
     </div>
 );
