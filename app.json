@@ -1,0 +1,16 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ],
+  "env": {
+  },
+  "formation": {
+  },
+  "name": "boom-clicker",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
