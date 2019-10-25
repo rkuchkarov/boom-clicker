@@ -16,7 +16,7 @@ const NextLevelButton = ({ handleClick }) => {
     return (
         <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="nextButton" onClick={handleClick}>
             <div className={`buttonLabel${isHovered ? ' buttonHovered' : ''}`}>
-            Next level
+            Следующий уровень
             </div>
             <img
                 className="arrow"

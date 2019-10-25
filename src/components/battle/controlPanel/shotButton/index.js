@@ -5,7 +5,7 @@ import {getPercentage} from "../../../../utils/percent";
 const ShotButton = ({ isReloading, isCastleCaptured, reloadTimeRemaining, reloadTime, buttonRef, handleClick }) => {
     const isDisabled = isReloading || isCastleCaptured;
     const reloadPercent = 100 - getPercentage(reloadTimeRemaining, reloadTime);
-    const label = isReloading ? 'Reloading...' : 'Attack';
+    const label = isReloading ? 'Заряжаем...' : 'Атака';
 
     return (
         <>

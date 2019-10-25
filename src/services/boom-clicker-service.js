@@ -161,6 +161,47 @@ export const UPGRADE_PRICES = {
     5: 100
 };
 
+export const UPDADE_TRANSLATES = {
+    'damageIncrease': 'Урон от пушки',
+    'reloadTimeReduce': 'Время перезарядки',
+    'criticalChanceIncrease': 'Шанс критической атаки',
+    'criticalDamageIncrease': 'Критический урон',
+    'assaultUnitDamageIncrease': 'Урон от юнита',
+    'fullAssaultUnitsIncrease': 'Количество юнитов',
+    'assaultUnitsRestoreIncrease': 'Восстановление юнитов',
+};
+
+export const UPDADE_SYMBOLS = {
+    'damageIncrease': {
+        'prefix': '+',
+        'postfix': '%',
+    },
+    'reloadTimeReduce': {
+        'prefix': '',
+        'postfix': '%',
+    },
+    'criticalChanceIncrease': {
+        'prefix': '+',
+        'postfix': '%',
+    },
+    'criticalDamageIncrease': {
+        'prefix': '+',
+        'postfix': '%',
+    },
+    'assaultUnitDamageIncrease': {
+        'prefix': '+',
+        'postfix': '%',
+    },
+    'fullAssaultUnitsIncrease': {
+        'prefix': '+',
+        'postfix': '%',
+    },
+    'assaultUnitsRestoreIncrease': {
+        'prefix': '+',
+        'postfix': '',
+    },
+};
+
 let currentLevel = 0;
 let currentPlayerLevel = 1;
 let currentGold = 0;

@@ -16,4 +16,5 @@
 .bar-value {
     position: relative;
     top: -23px;
+    cursor: default;
 }
