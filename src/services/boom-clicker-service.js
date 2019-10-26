@@ -57,7 +57,7 @@ const PLAYER_LEVELS = {
         assaultUnits: 10,
         fullAssaultUnits: 10,
         assaultUnitsRestore: 0,
-        assaultUnitDamage: 0.5
+        assaultUnitDamage: 0.5,
     },
     2: {
         damage: 12,
@@ -261,21 +261,42 @@ export const getLevel = () => {
     return currentLevel;
 };
 
+const getCastleHealth = (castle) => {
+    const player = getPlayer();
+    const gun_dps = player.damage / (player.reloadTime / 1000) + player.criticalDamage * (player.criticalChance / 100);
+    const units_max_damage = player.fullAssaultUnits * player.assaultUnitDamage;
+    const units_lifetime = castle.castle.assaultDefense ? player.fullAssaultUnits / castle.castle.assaultDefense : 0;
+
+    const units_damage_iteration = castle.castle.assaultDefense
+        ? units_max_damage * units_max_damage / (2 * castle.castle.assaultDefense * player.assaultUnitDamage)
+        : 0; 
+    const units_dps = castle.castle.assaultDefense && player.assaultUnitsRestore 
+        ? units_damage_iteration / (units_lifetime + player.fullAssaultUnits / player.assaultUnitsRestore)
+        : castle.castle.assaultDefense 
+            ? 0 
+            : units_max_damage;
+    const add_part = castle.castle.assaultDefense && !player.assaultUnitsRestore ? units_damage_iteration : 0;
+    return 45 * (units_dps + gun_dps - castle.castle.restore) + add_part;
+};
+
 export const getGeneratedCastle = () => {
     const castle = {
         castle: {
             health: 50,
             fullHealth: 50,
-            restore: 0,
-            assaultDefense: 0
+            restore: 0.5,
+            assaultDefense: 1
         },
         isTraining: false
     };
-    currentUpgrades.forEach(( upgrade ) => {
+    /*currentUpgrades.forEach(( upgrade ) => {
         const newCastleHealth = castle.castle.health + (upgrade.level * 20);
         castle.castle.health = newCastleHealth;
         castle.castle.fullHealth = newCastleHealth;
-    });
+    });*/
+    const castleHealth = getCastleHealth(castle);
+    castle.castle.health = castleHealth;
+    castle.castle.fullHealth = castleHealth;
     return castle;
 };
 
@@ -329,7 +350,6 @@ export const getPlayer = () => {
             }
         })
     }
-
     return PLAYER;
 };
 
