@@ -30,6 +30,7 @@ class BattleContainer extends Component {
             isBattleFinished,
             isTraining,
             playerUnits,
+            playerFullUnits,
             level,
             assaultStarted,
             playerDamage,
@@ -93,6 +94,7 @@ class BattleContainer extends Component {
                     playerUnitDamage={playerUnitDamage}
                     castleFullHealth={castleFullHealth}
                     castleHealth={castleHealth}
+                    playerFullUnits={playerFullUnits}
                     battleStart={battleStart}
                     trainingFinished={trainingFinished}
                 />
@@ -114,6 +116,7 @@ const mapStateToProps = (state) => {
         castleFullHealth: selectors.getCastleFullHealth(state),
         playerDamage: selectors.getPlayerDamage(state),
         playerUnits: selectors.getPlayerUnits(state),
+        playerFullUnits: selectors.getFullAssaultUnits(state),
         playerCriticalChance: selectors.getPlayerCriticalChance(state),
         playerUnitDamage: selectors.getPlayerUnitDamage(state),
         reloadTime: selectors.getPlayerReloadTime(state),

@@ -1,0 +1,18 @@
+.wrapper {
+    background-image: url('castleBackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.timer {
+    position: absolute;
+    right: 193px;
+    font-size: 24px;
+    font-weight: bold;
+    bottom: 6px;
+}

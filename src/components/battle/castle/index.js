@@ -6,11 +6,6 @@ import './style.css';
 
 const Castle = React.forwardRef(({ isPlayerReloading, isCastleCaptured, health, fullHealth }, ref) => (
     <div ref={ref} className={"castle"}>
-        <img
-            className={"castle-img" + (isPlayerReloading ? " reloading" : "") + (isCastleCaptured ? " captured" : "")}
-            src={castle}
-            alt="Castle"
-        />
         <ProgressBar
             value={health}
             maxValue={fullHealth}

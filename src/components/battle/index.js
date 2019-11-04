@@ -5,7 +5,10 @@ import ControlPanel from "./controlPanel";
 import Player from "./player";
 import TrainingPopup from "./trainingPopup";
 
-import './style.css';
+import style from './style.module.css';
+import AssaultHud from "./assault";
+import HealthHud from "./health";
+import AttackButton from "./attackButton";
 
 const Battle = (
     {
@@ -22,6 +25,7 @@ const Battle = (
         playerCriticalChance,
         reloadTimeRemaining,
         playerUnits,
+        playerFullUnits,
         playerUnitDamage,
         battleTime,
         assaultStarted,
@@ -39,7 +43,7 @@ const Battle = (
     const assaultRef = useRef(null);
 
     return (
-        <>
+        <div className={style.wrapper}>
             {isTraining &&
                 <TrainingPopup
                     playerInfoRef={playerInfoRef}
@@ -49,40 +53,34 @@ const Battle = (
                     level={level}
                     onClose={onEndTraining}
                 />}
-            <div className={"wrapper"}>
-                <div className={"timer"}>{battleTime}</div>
-                <div className={"levelBlock"}>
-                    <InfoBlock level={level} />
-                    <Castle
-                        ref={castleRef}
-                        isPlayerReloading={isReloading}
-                        isCastleCaptured={isCastleCaptured}
-                        health={castleHealth}
-                        fullHealth={castleFullHealth}
-                    />
-                </div>
-                <Player
-                    level={level}
-                    playerDamage={playerDamage}
-                    playerCriticalChance={playerCriticalChance}
-                    playerUnits={playerUnits}
-                    playerUnitDamage={playerUnitDamage}
-                    infoRef={playerInfoRef}
-                />
-                <ControlPanel
-                    isReloading={isReloading}
-                    onPlayerAttack={playerAttack}
-                    isCastleCaptured={isCastleCaptured}
+            <div>
+                <div className={style.timer}>{battleTime}</div>
+                <AssaultHud
                     isAssault={isAssault}
-                    reloadTime={reloadTime}
-                    reloadTimeRemaining={reloadTimeRemaining}
                     playerUnits={playerUnits}
-                    assaultStarted={assaultStarted}
-                    attackRef={attackRef}
-                    assaultRef={assaultRef}
+                    playerFullUnits={playerFullUnits}
+                    onAssault={assaultStarted}
+                    isCastleCaptured={isCastleCaptured}
                 />
+                <HealthHud health={castleHealth} fullHealth={castleFullHealth} />
+                <AttackButton
+                    onAttack={playerAttack}
+                    isReloading={isReloading}
+                />
+                {/*<ControlPanel*/}
+                {/*    isReloading={isReloading}*/}
+                {/*    onPlayerAttack={playerAttack}*/}
+                {/*    isCastleCaptured={isCastleCaptured}*/}
+                {/*    isAssault={isAssault}*/}
+                {/*    reloadTime={reloadTime}*/}
+                {/*    reloadTimeRemaining={reloadTimeRemaining}*/}
+                {/*    playerUnits={playerUnits}*/}
+                {/*    assaultStarted={assaultStarted}*/}
+                {/*    attackRef={attackRef}*/}
+                {/*    assaultRef={assaultRef}*/}
+                {/*/>*/}
             </div>
-        </>
+        </div>
     );
 };
 
