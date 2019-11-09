@@ -1,6 +1,6 @@
 .wrapper {
     position: absolute;
-    bottom: 105px;
+    bottom: 99px;
     left: 27px;
 }
 
@@ -38,4 +38,16 @@
     bottom: -102px;
     left: -106px;
     cursor: pointer;
+}
+
+.count {
+    position: relative;
+    bottom: -101px;
+    left: -108px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.attack {
+    color: #d23600;
 }

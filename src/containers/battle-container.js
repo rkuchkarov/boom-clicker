@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component, useState} from 'react';
 import { connect } from 'react-redux';
+import Fullscreen from "react-full-screen";
 import { bindActionCreators } from "redux";
 import * as selectors from "../selectors/selectors";
 import Battle from "../components/battle";
@@ -14,12 +15,19 @@ import {
     upgradeBuy
 } from "../actions";
 import Research from "../components/battle/research";
+import style from './style.module.css';
 
 class BattleContainer extends Component {
     constructor(props) {
         super(props);
         props.battlePrepare();
+        this.state = { isFullScreen: false};
     }
+
+    onToggleFullScreen = () => {
+        const {isFullScreen} = this.state;
+        this.setState({isFullScreen: !isFullScreen});
+    };
 
     render() {
         const {
@@ -57,9 +65,11 @@ class BattleContainer extends Component {
         } = this.props;
 
         const isRewardScreen = isBattleFinished && !isResearch;
+        const {isFullScreen} = this.state;
 
         return(
-            <>
+            <Fullscreen enabled={isFullScreen}>
+                <div className={style.fullscreen} onClick={this.onToggleFullScreen}/>
                 { isRewardScreen &&
                 <Reward
                     totalPlayerDamage={totalPlayerDamage}
@@ -98,7 +108,7 @@ class BattleContainer extends Component {
                     battleStart={battleStart}
                     trainingFinished={trainingFinished}
                 />
-            </>
+            </Fullscreen>
         );
     }
 }

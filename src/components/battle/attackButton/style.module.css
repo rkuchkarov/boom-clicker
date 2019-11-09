@@ -1,11 +1,44 @@
 .wrapper {
     position: fixed;
     bottom: -2px;
-    right: 43px;
+    right: 59px;
     cursor: pointer;
 }
 
+/*.attackButton {*/
+/*    width: 80px;*/
+/*    height: auto;*/
+/*    background-size: cover;*/
+/*}*/
+
 .attackButton {
     width: 80px;
-    height: auto;
+    height: 80px;
+    bottom: 7px;
+    right: 0;
+    position: relative;
+    background-image: url("attackButton.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+}
+
+.attackButtonDisabled {
+    width: 80px;
+    height: 80px;
+    bottom: 7px;
+    right: 0;
+    position: absolute;
+    background-image: url("attackButtonDisabled.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.time {
+    position: absolute;
+    bottom: 2px;
+    right: -55px;
+    font-size: 20px;
+    color: #ffffff;
 }

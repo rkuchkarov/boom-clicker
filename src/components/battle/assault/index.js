@@ -37,6 +37,7 @@ const AssaultHud = ({ isCastleCaptured, isAssault, playerUnits, playerFullUnits,
                 className={style.assaultAttack}
                 src={assaultButtonImage}
             />
+            <span className={`${style.count}${isAssault ? ` ${style.attack}` : ''}`}>{`${playerUnits}/${playerFullUnits}`}</span>
         </div>
     );
 };

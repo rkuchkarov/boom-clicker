@@ -1,0 +1,56 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    box-shadow: 0 0 4px #333333;
+}
+
+.victory {
+    width: 376px;
+    height: 339px;
+    z-index: 1;
+    background-image: url("victory.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.science {
+    position: relative;
+    bottom: -79px;
+    left: 69px;
+    width: 71px;
+    height: 78px;
+    z-index: 2;
+    background-image: url("science.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.science:active {
+    filter: brightness(67%);
+}
+
+.nextLevel {
+    position: relative;
+    bottom: -75px;
+    right: 60px;
+    width: 71px;
+    height: 86px;
+    z-index: 2;
+    background-image: url("nextLevel.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.nextLevel:active {
+    filter: brightness(67%);
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

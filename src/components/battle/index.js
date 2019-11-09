@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {useRef, useState} from "react";
 import InfoBlock from "./infoBlock";
 import Castle from "./castle";
 import ControlPanel from "./controlPanel";
@@ -54,19 +54,25 @@ const Battle = (
                     onClose={onEndTraining}
                 />}
             <div>
-                <div className={style.timer}>{battleTime}</div>
-                <AssaultHud
-                    isAssault={isAssault}
-                    playerUnits={playerUnits}
-                    playerFullUnits={playerFullUnits}
-                    onAssault={assaultStarted}
-                    isCastleCaptured={isCastleCaptured}
-                />
-                <HealthHud health={castleHealth} fullHealth={castleFullHealth} />
-                <AttackButton
-                    onAttack={playerAttack}
-                    isReloading={isReloading}
-                />
+                {/*<div className={style.timer}>{battleTime}</div>*/}
+                {!isCastleCaptured && (
+                    <>
+                        <AssaultHud
+                            isAssault={isAssault}
+                            playerUnits={playerUnits}
+                            playerFullUnits={playerFullUnits}
+                            onAssault={assaultStarted}
+                            isCastleCaptured={isCastleCaptured}
+                        />
+                        <HealthHud health={castleHealth} fullHealth={castleFullHealth} />
+                        <AttackButton
+                            onAttack={playerAttack}
+                            isReloading={isReloading}
+                            reloadTime={reloadTime}
+                            reloadTimeRemaining={reloadTimeRemaining}
+                            isCastleCaptured={isCastleCaptured}
+                        />
+                    </>)}
                 {/*<ControlPanel*/}
                 {/*    isReloading={isReloading}*/}
                 {/*    onPlayerAttack={playerAttack}*/}
