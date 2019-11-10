@@ -84,7 +84,7 @@ class BattleContainer extends Component {
                         playerUpgrades={playerUpgrades}
                         upgrades={upgrades}
                         upgradeBuy={upgradeBuy}
-                        researchClosed={researchClosed}
+                        battlePrepare={battlePrepare}
                     />
                 }
                 <Battle

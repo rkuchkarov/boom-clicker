@@ -1,0 +1,7 @@
+.wrapper {
+    display: flex;
+    margin-left: 33px;
+    margin-top: 21px;
+    max-width: 360px;
+    flex-wrap: wrap-reverse;
+}

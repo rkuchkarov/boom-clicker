@@ -276,7 +276,7 @@ const getCastleHealth = (castle) => {
             ? 0 
             : units_max_damage;
     const add_part = castle.castle.assaultDefense && !player.assaultUnitsRestore ? units_damage_iteration : 0;
-    return 5 * (units_dps + gun_dps - castle.castle.restore) + add_part;
+    return 2 * (units_dps + gun_dps - castle.castle.restore) + add_part;
 };
 
 export const getGeneratedCastle = () => {
