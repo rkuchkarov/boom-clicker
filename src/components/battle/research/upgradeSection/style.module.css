@@ -1,22 +1,39 @@
 .wrapper {
     padding: 5px;
     background-color: #756b44;
-    width: 77px;
-    height: 68px;
+    width: 50px;
+    height: 46px;
     display: flex;
-    flex-direction: column;
+    margin: 3px;
+    justify-content: center;
     align-items: center;
+    border: solid 2px transparent;
 }
 
 .icon {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 100% 100%;
-    width: 36px;
-    height: 45px;
-    transform: rotate(35deg);
+    height: 40px;
+    transform: rotate(32deg);
+    position: relative;
+    left: 13px;
+    bottom: 5px;
 }
 
 .value {
     align-self: flex-end;
+    position: relative;
+    bottom: -5px;
+    right: 14px;
+}
+
+.available {
+    background-color: #754444;
+    border-color: #756b44;
+}
+
+.buyed {
+    border-color: #ffe251;
+}
+
+.selected {
+    border: solid 2px #ffffff;
 }

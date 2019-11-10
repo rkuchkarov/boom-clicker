@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import _ from "lodash";
-import style from "./style.module.css";
+import { getPercentage } from "../../../utils/percent";
 
 import attackButton from './attackButton.png';
 import attackButtonHover from './attackButtonHover.png';
-import attackButtonDisabled from './attackButtonDisabled.png';
-import { getPercentage } from "../../../utils/percent";
+import style from "./style.module.css";
 
 const AttackButton = ({ isCastleCaptured, isReloading, reloadTime, reloadTimeRemaining, onAttack }) =>  {
     const [isHovered, setIsHovered] = useState(false);
@@ -19,7 +18,6 @@ const AttackButton = ({ isCastleCaptured, isReloading, reloadTime, reloadTimeRem
     const timeForUI = (reloadTimeRemaining / 1000).toFixed(1);
     const reloadPercent = 100 - getPercentage(reloadTimeRemaining, reloadTime);
     const attackHeight = _.round((80 / 100) * reloadPercent);
-    console.log(reloadPercent);
 
     return (
         <div className={style.wrapper} >

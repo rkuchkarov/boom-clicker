@@ -12,7 +12,7 @@ const HealthHud = ({ health, fullHealth }) => {
     return(
         <div className={style.wrapper}>
             <div className={style.healthBar} style={{ width: `${healthWidth}px` }} />
-            <img className={style.healthWrapper} src={healthWrapper} />
+            <img alt={'health'} className={style.healthWrapper} src={healthWrapper} />
         </div>
     );
 };

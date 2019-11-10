@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import style from "./style.module.css";
+import { getPercentage } from "../../../utils/percent";
 
 import assaultBar from './assaultBar.png';
 import assaultAttack from './assaultAttack.png';
 import assaultAttacking from './assaultAttacking.png';
 import assaultAttackHover from './assaultAttackHover.png';
-import { getPercentage } from "../../../utils/percent";
-
+import style from "./style.module.css";
 const UNITS_HEIGHT = 217;
 
 const AssaultHud = ({ isCastleCaptured, isAssault, playerUnits, playerFullUnits, onAssault }) => {
@@ -27,8 +26,9 @@ const AssaultHud = ({ isCastleCaptured, isAssault, playerUnits, playerFullUnits,
     return (
         <div className={style.wrapper}>
             <div className={isAssault ? style.assaultAttackingBar : style.assaultRestoreBar} style={{ height: `${unitsBarHeight}px` }} />
-            <img className={style.assaultBar} src={assaultBar} />
+            <img alt={'assaultBar'} className={style.assaultBar} src={assaultBar} />
             <img
+                alt={'assaultButton'}
                 onTouchStart={hoverOn}
                 onMouseDown={hoverOn}
                 onMouseUp={hoverOff}

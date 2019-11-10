@@ -1,0 +1,15 @@
+.wrapper {
+    position: relative;
+    top: -229px;
+    right: -246px;
+    float: left;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 20px;
+}
+
+.gold {
+    vertical-align: bottom;
+    height: 19px;
+    margin-left: 8px;
+}

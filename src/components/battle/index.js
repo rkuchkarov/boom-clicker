@@ -1,14 +1,9 @@
-import React, {useRef, useState} from "react";
-import InfoBlock from "./infoBlock";
-import Castle from "./castle";
-import ControlPanel from "./controlPanel";
-import Player from "./player";
+import React, {useRef} from "react";
 import TrainingPopup from "./trainingPopup";
-
-import style from './style.module.css';
 import AssaultHud from "./assault";
 import HealthHud from "./health";
 import AttackButton from "./attackButton";
+import style from './style.module.css';
 
 const Battle = (
     {
@@ -21,13 +16,9 @@ const Battle = (
         castleFullHealth,
         playerAttack,
         reloadTime,
-        playerDamage,
-        playerCriticalChance,
         reloadTimeRemaining,
         playerUnits,
         playerFullUnits,
-        playerUnitDamage,
-        battleTime,
         assaultStarted,
         battleStart,
         trainingFinished
@@ -54,7 +45,6 @@ const Battle = (
                     onClose={onEndTraining}
                 />}
             <div>
-                {/*<div className={style.timer}>{battleTime}</div>*/}
                 {!isCastleCaptured && (
                     <>
                         <AssaultHud
@@ -73,18 +63,6 @@ const Battle = (
                             isCastleCaptured={isCastleCaptured}
                         />
                     </>)}
-                {/*<ControlPanel*/}
-                {/*    isReloading={isReloading}*/}
-                {/*    onPlayerAttack={playerAttack}*/}
-                {/*    isCastleCaptured={isCastleCaptured}*/}
-                {/*    isAssault={isAssault}*/}
-                {/*    reloadTime={reloadTime}*/}
-                {/*    reloadTimeRemaining={reloadTimeRemaining}*/}
-                {/*    playerUnits={playerUnits}*/}
-                {/*    assaultStarted={assaultStarted}*/}
-                {/*    attackRef={attackRef}*/}
-                {/*    assaultRef={assaultRef}*/}
-                {/*/>*/}
             </div>
         </div>
     );

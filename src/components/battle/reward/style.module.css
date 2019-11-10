@@ -50,6 +50,22 @@
     filter: brightness(67%);
 }
 
+.reward {
+    animation: fadein .8s;
+    position: absolute;
+    top: 12px;
+    right: 9px;
+    z-index: 1;
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.icon {
+    width: 40px;
+    position: relative;
+    top: 3px;
+}
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }

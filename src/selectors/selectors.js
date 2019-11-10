@@ -25,6 +25,7 @@ export const getPlayerReloadTimeRemaining = (state) => _.get(state, 'player.relo
 export const getIsPlayerReloading = (state) => _.get(state, 'player.isReloading');
 export const getIsAssault = (state) => _.get(state, 'player.isAssault');
 export const getReward = (state) => _.get(state, 'reward');
+export const getSelectedUpgrade = (state) => _.get(state, 'selectedUpgrade');
 export const getTotalPlayerDamage = (state) => _.round(_.get(state, 'totalPlayerDamage'), 1);
 export const getTotalUnitsDamage = (state) => _.round(_.get(state, 'totalUnitsDamage'), 1);
 export const getAssaultUnitsRestore = (state) => _.round(_.get(state, 'player.assaultUnitsRestore'), 1);

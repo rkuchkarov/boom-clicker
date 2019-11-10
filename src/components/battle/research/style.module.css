@@ -20,6 +20,35 @@
     cursor: default;
 }
 
+.buy {
+    background-image: url("buyAvailable.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: right;
+    position: relative;
+    bottom: 49px;
+    right: -72px;
+    width: 45px;
+    height: 45px;
+    z-index: 1;
+    animation: fadein .8s;
+    cursor: pointer;
+}
+
+.gerb {
+    background-image: url("gerb.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: right;
+    position: relative;
+    top: -287px;
+    right: -20px;
+    width: 173px;
+    height: 283px;
+    z-index: 1;
+    animation: fadein .8s;
+}
+
 .upgradesList {
     overflow: scroll;
 }
@@ -38,12 +67,12 @@
     margin-left: auto;
     width: 71px;
     height: 86px;
-    z-index: 1;
+    z-index: 2;
     background-image: url("nextLevel.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
-    bottom: -50px;
+    bottom: 86px;
     float: right;
     right: 15px;
 }

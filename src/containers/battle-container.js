@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Fullscreen from "react-full-screen";
 import { bindActionCreators } from "redux";
@@ -12,7 +12,7 @@ import {
     playerAttack, researchClosed,
     researchOpened,
     trainingFinished,
-    upgradeBuy
+    upgradeBuy, upgradeSelect
 } from "../actions";
 import Research from "../components/battle/research";
 import style from './style.module.css';
@@ -57,11 +57,14 @@ class BattleContainer extends Component {
             totalUnitsDamage,
             battleTime,
             researchOpened,
-            researchClosed,
             playerGold,
             playerUpgrades,
             upgrades,
-            upgradeBuy
+            upgradeBuy,
+            upgradeSelect,
+            selectedUpgrade,
+            playerCriticalDamage,
+            playerUnitsRestore
         } = this.props;
 
         const isRewardScreen = isBattleFinished && !isResearch;
@@ -85,6 +88,15 @@ class BattleContainer extends Component {
                         upgrades={upgrades}
                         upgradeBuy={upgradeBuy}
                         battlePrepare={battlePrepare}
+                        selectedUpgrade={selectedUpgrade}
+                        upgradeSelect={upgradeSelect}
+                        playerUnitsRestore={playerUnitsRestore}
+                        playerDamage={playerDamage}
+                        playerCriticalChance={playerCriticalChance}
+                        reloadTime={reloadTime}
+                        playerFullUnits={playerFullUnits}
+                        playerUnitDamage={playerUnitDamage}
+                        playerCriticalDamage={playerCriticalDamage}
                     />
                 }
                 <Battle
@@ -126,8 +138,10 @@ const mapStateToProps = (state) => {
         castleFullHealth: selectors.getCastleFullHealth(state),
         playerDamage: selectors.getPlayerDamage(state),
         playerUnits: selectors.getPlayerUnits(state),
+        playerUnitsRestore: selectors.getAssaultUnitsRestore(state),
         playerFullUnits: selectors.getFullAssaultUnits(state),
         playerCriticalChance: selectors.getPlayerCriticalChance(state),
+        playerCriticalDamage: selectors.getPlayerCriticalDamage(state),
         playerUnitDamage: selectors.getPlayerUnitDamage(state),
         reloadTime: selectors.getPlayerReloadTime(state),
         reloadTimeRemaining: selectors.getPlayerReloadTimeRemaining(state),
@@ -137,7 +151,8 @@ const mapStateToProps = (state) => {
         totalUnitsDamage: selectors.getTotalUnitsDamage(state),
         playerGold: selectors.getPlayerGold(state),
         playerUpgrades: selectors.getPlayerUpgrades(state),
-        upgrades: selectors.getUpgrades(state)
+        upgrades: selectors.getUpgrades(state),
+        selectedUpgrade: selectors.getSelectedUpgrade(state)
     };
 };
 
@@ -150,7 +165,8 @@ const mapDispatchToProps = (dispatch) => {
         trainingFinished,
         researchOpened,
         researchClosed,
-        upgradeBuy
+        upgradeBuy,
+        upgradeSelect
     }, dispatch);
 };
 
