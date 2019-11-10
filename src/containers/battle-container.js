@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import Fullscreen from "react-full-screen";
 import { bindActionCreators } from "redux";
 import * as selectors from "../selectors/selectors";
 import Battle from "../components/battle";
@@ -11,15 +12,22 @@ import {
     playerAttack, researchClosed,
     researchOpened,
     trainingFinished,
-    upgradeBuy
+    upgradeBuy, upgradeSelect
 } from "../actions";
 import Research from "../components/battle/research";
+import style from './style.module.css';
 
 class BattleContainer extends Component {
     constructor(props) {
         super(props);
         props.battlePrepare();
+        this.state = { isFullScreen: false};
     }
+
+    onToggleFullScreen = () => {
+        const {isFullScreen} = this.state;
+        this.setState({isFullScreen: !isFullScreen});
+    };
 
     render() {
         const {
@@ -30,6 +38,7 @@ class BattleContainer extends Component {
             isBattleFinished,
             isTraining,
             playerUnits,
+            playerFullUnits,
             level,
             assaultStarted,
             playerDamage,
@@ -48,17 +57,22 @@ class BattleContainer extends Component {
             totalUnitsDamage,
             battleTime,
             researchOpened,
-            researchClosed,
             playerGold,
             playerUpgrades,
             upgrades,
-            upgradeBuy
+            upgradeBuy,
+            upgradeSelect,
+            selectedUpgrade,
+            playerCriticalDamage,
+            playerUnitsRestore
         } = this.props;
 
         const isRewardScreen = isBattleFinished && !isResearch;
+        const {isFullScreen} = this.state;
 
         return(
-            <>
+            <Fullscreen enabled={isFullScreen}>
+                <div className={style.fullscreen} onClick={this.onToggleFullScreen}/>
                 { isRewardScreen &&
                 <Reward
                     totalPlayerDamage={totalPlayerDamage}
@@ -73,7 +87,16 @@ class BattleContainer extends Component {
                         playerUpgrades={playerUpgrades}
                         upgrades={upgrades}
                         upgradeBuy={upgradeBuy}
-                        researchClosed={researchClosed}
+                        battlePrepare={battlePrepare}
+                        selectedUpgrade={selectedUpgrade}
+                        upgradeSelect={upgradeSelect}
+                        playerUnitsRestore={playerUnitsRestore}
+                        playerDamage={playerDamage}
+                        playerCriticalChance={playerCriticalChance}
+                        reloadTime={reloadTime}
+                        playerFullUnits={playerFullUnits}
+                        playerUnitDamage={playerUnitDamage}
+                        playerCriticalDamage={playerCriticalDamage}
                     />
                 }
                 <Battle
@@ -93,10 +116,11 @@ class BattleContainer extends Component {
                     playerUnitDamage={playerUnitDamage}
                     castleFullHealth={castleFullHealth}
                     castleHealth={castleHealth}
+                    playerFullUnits={playerFullUnits}
                     battleStart={battleStart}
                     trainingFinished={trainingFinished}
                 />
-            </>
+            </Fullscreen>
         );
     }
 }
@@ -114,7 +138,10 @@ const mapStateToProps = (state) => {
         castleFullHealth: selectors.getCastleFullHealth(state),
         playerDamage: selectors.getPlayerDamage(state),
         playerUnits: selectors.getPlayerUnits(state),
+        playerUnitsRestore: selectors.getAssaultUnitsRestore(state),
+        playerFullUnits: selectors.getFullAssaultUnits(state),
         playerCriticalChance: selectors.getPlayerCriticalChance(state),
+        playerCriticalDamage: selectors.getPlayerCriticalDamage(state),
         playerUnitDamage: selectors.getPlayerUnitDamage(state),
         reloadTime: selectors.getPlayerReloadTime(state),
         reloadTimeRemaining: selectors.getPlayerReloadTimeRemaining(state),
@@ -124,7 +151,8 @@ const mapStateToProps = (state) => {
         totalUnitsDamage: selectors.getTotalUnitsDamage(state),
         playerGold: selectors.getPlayerGold(state),
         playerUpgrades: selectors.getPlayerUpgrades(state),
-        upgrades: selectors.getUpgrades(state)
+        upgrades: selectors.getUpgrades(state),
+        selectedUpgrade: selectors.getSelectedUpgrade(state)
     };
 };
 
@@ -137,7 +165,8 @@ const mapDispatchToProps = (dispatch) => {
         trainingFinished,
         researchOpened,
         researchClosed,
-        upgradeBuy
+        upgradeBuy,
+        upgradeSelect
     }, dispatch);
 };
 

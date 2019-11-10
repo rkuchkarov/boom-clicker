@@ -1,0 +1,11 @@
+.fullscreen {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 7px;
+    left: 7px;
+    z-index: 3;
+    background-image: url("fullscreen.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

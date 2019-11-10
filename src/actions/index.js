@@ -32,6 +32,14 @@ export const ASSAULT_SEC_PASSED = 'ASSAULT_SEC_PASSED';
 export const ASSAULT_FINISHED = 'ASSAULT_FINISHED';
 export const REWARD_LOADED = 'REWARD_LOADED';
 export const BATTLE_SEC_PASSED = 'BATTLE_SEC_PASSED';
+export const UPGRADE_SELECTED = 'UPGRADE_SELECTED';
+
+export const upgradeSelect = (name) => {
+    return {
+        type: UPGRADE_SELECTED,
+        name
+    }
+};
 
 export const upgradeBuy = (name) => {
     return {

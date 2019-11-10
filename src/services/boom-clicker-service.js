@@ -101,7 +101,7 @@ const PLAYER_LEVELS = {
     }
 };
 
-const PLAYER_UPGRADES = {
+export const PLAYER_UPGRADES = {
     damageIncrease : {
         1: 20,
         2: 40,
@@ -230,7 +230,6 @@ const updatePlayerWithUpgradePercentage = (player, playerField, upgradeName, upg
     if (upgradeValue > 0) {
         player[playerField] = player[playerField] + increaseNumByPercentage(player[playerField], upgradeValue);
     } else {
-        console.log(upgradeValue);
         player[playerField] = decreaseNumByPercentage(player[playerField], upgradeValue);
     }
 };
@@ -276,7 +275,7 @@ const getCastleHealth = (castle) => {
             ? 0 
             : units_max_damage;
     const add_part = castle.castle.assaultDefense && !player.assaultUnitsRestore ? units_damage_iteration : 0;
-    return 45 * (units_dps + gun_dps - castle.castle.restore) + add_part;
+    return 15 * (units_dps + gun_dps - castle.castle.restore) + add_part;
 };
 
 export const getGeneratedCastle = () => {
@@ -312,7 +311,6 @@ export const upPlayerLevel = () => {
 };
 
 export const getPlayer = () => {
-    console.log(currentPlayerLevel);
     const PLAYER = {
         ...PLAYER_LEVELS[currentPlayerLevel],
         level: currentPlayerLevel,

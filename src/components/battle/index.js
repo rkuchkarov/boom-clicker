@@ -1,11 +1,9 @@
-import React, { useRef } from "react";
-import InfoBlock from "./infoBlock";
-import Castle from "./castle";
-import ControlPanel from "./controlPanel";
-import Player from "./player";
+import React, {useRef} from "react";
 import TrainingPopup from "./trainingPopup";
-
-import './style.css';
+import AssaultHud from "./assault";
+import HealthHud from "./health";
+import AttackButton from "./attackButton";
+import style from './style.module.css';
 
 const Battle = (
     {
@@ -18,12 +16,9 @@ const Battle = (
         castleFullHealth,
         playerAttack,
         reloadTime,
-        playerDamage,
-        playerCriticalChance,
         reloadTimeRemaining,
         playerUnits,
-        playerUnitDamage,
-        battleTime,
+        playerFullUnits,
         assaultStarted,
         battleStart,
         trainingFinished
@@ -39,7 +34,7 @@ const Battle = (
     const assaultRef = useRef(null);
 
     return (
-        <>
+        <div className={style.wrapper}>
             {isTraining &&
                 <TrainingPopup
                     playerInfoRef={playerInfoRef}
@@ -49,40 +44,27 @@ const Battle = (
                     level={level}
                     onClose={onEndTraining}
                 />}
-            <div className={"wrapper"}>
-                <div className={"timer"}>{battleTime}</div>
-                <div className={"levelBlock"}>
-                    <InfoBlock level={level} />
-                    <Castle
-                        ref={castleRef}
-                        isPlayerReloading={isReloading}
-                        isCastleCaptured={isCastleCaptured}
-                        health={castleHealth}
-                        fullHealth={castleFullHealth}
-                    />
-                </div>
-                <Player
-                    level={level}
-                    playerDamage={playerDamage}
-                    playerCriticalChance={playerCriticalChance}
-                    playerUnits={playerUnits}
-                    playerUnitDamage={playerUnitDamage}
-                    infoRef={playerInfoRef}
-                />
-                <ControlPanel
-                    isReloading={isReloading}
-                    onPlayerAttack={playerAttack}
-                    isCastleCaptured={isCastleCaptured}
-                    isAssault={isAssault}
-                    reloadTime={reloadTime}
-                    reloadTimeRemaining={reloadTimeRemaining}
-                    playerUnits={playerUnits}
-                    assaultStarted={assaultStarted}
-                    attackRef={attackRef}
-                    assaultRef={assaultRef}
-                />
+            <div>
+                {!isCastleCaptured && (
+                    <>
+                        <AssaultHud
+                            isAssault={isAssault}
+                            playerUnits={playerUnits}
+                            playerFullUnits={playerFullUnits}
+                            onAssault={assaultStarted}
+                            isCastleCaptured={isCastleCaptured}
+                        />
+                        <HealthHud health={castleHealth} fullHealth={castleFullHealth} />
+                        <AttackButton
+                            onAttack={playerAttack}
+                            isReloading={isReloading}
+                            reloadTime={reloadTime}
+                            reloadTimeRemaining={reloadTimeRemaining}
+                            isCastleCaptured={isCastleCaptured}
+                        />
+                    </>)}
             </div>
-        </>
+        </div>
     );
 };
 

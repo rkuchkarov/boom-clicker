@@ -38,11 +38,12 @@ const initialState = {
     isLevelFetching: false,
     totalPlayerDamage: 0,
     totalUnitsDamage: 0,
-    upgrades: []
+    upgrades: [],
+    selectedUpgrade: null
 };
 
 const reducer = (state = initialState, action) => {
-    console.log(action, state);
+    // console.log(action, state);
     switch (action.type) {
 
         case A.RESET_STATE:
@@ -70,6 +71,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 battleTime: state.battleTime + 1
+            };
+
+        case A.UPGRADE_SELECTED:
+            return {
+                ...state,
+                selectedUpgrade: action.name
             };
 
         case A.LEVEL_FETCH:

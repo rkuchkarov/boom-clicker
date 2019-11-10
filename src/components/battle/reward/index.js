@@ -1,27 +1,16 @@
 import React from 'react';
-import NextLevelButton from "../../battle/nextLevelButton";
 import Overlay from "../../elements/overlay";
-import './style.css';
+import goldIcon from './gold.png';
+import style from "./style.module.css";
 
-const Reward = ({ reward: { gold, science }, battleTime, totalPlayerDamage, totalUnitsDamage, battlePrepare, researchOpened }) => (
+const Reward = ({ reward: { gold },  battlePrepare, researchOpened }) => (
     <>
-        <Overlay type={'hard'} />
-        <div className={"rewardWrapper"}>
-            <div className={"rewardBlock"}>
-                <div className={"rewardTitle"}>Победа!</div>
-                <div className={"rewardDescription"}>Получено:
-                    { gold && <div className={"rewardItem"}>{gold} золота</div> }
-                    { science && <div className={"rewardItem"}>{science} науки</div> }
-                </div>
-                <div className={"rewardSummary"}>
-                    <div className={"rewardPlayerDamage"}>Урона от игрока: {totalPlayerDamage}</div>
-                    <div className={"rewardAssaultDamage"}>Урона от юнитов: {totalUnitsDamage}</div>
-                    <div className={"rewardTime"}>Времени потрачено: {battleTime}</div>
-                </div>
-                <div className={'rewardFooter'}>
-                    <div className={'openResearch'} onClick={researchOpened}>Исследования</div>
-                    <NextLevelButton handleClick={battlePrepare} /></div>
-            </div>
+        <Overlay type={'light'} />
+        <div className={style.wrapper}>
+            <div className={style.reward}>+{gold} <img alt={'gold'} className={style.icon} src={goldIcon}/></div>
+            <div className={style.science} onClick={researchOpened} />
+            <div className={style.victory} />
+            <div className={style.nextLevel} onClick={battlePrepare} />
         </div>
     </>
 );

@@ -1,0 +1,26 @@
+.wrapper {
+    position: absolute;
+    top: -14px;
+    right: 8px;
+}
+
+.healthWrapper {
+    position: relative;
+    width: 257px;
+    height: auto;
+}
+
+.healthBar {
+    background-image: url('healthBar.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 14px;
+    width: 236px;
+    position: relative;
+    top: 42px;
+    left: 10px;
+}
+
+.heal {
+    width: 236px;
+}

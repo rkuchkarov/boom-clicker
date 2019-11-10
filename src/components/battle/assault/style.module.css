@@ -1,0 +1,53 @@
+.wrapper {
+    position: absolute;
+    bottom: 99px;
+    left: 27px;
+}
+
+.assaultBar {
+    width: 86px;
+    height: auto;
+}
+
+.assaultRestoreBar {
+    background-image: url('assaultRestoreBar.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 17px;
+    height: 217px;
+    position: relative;
+    bottom: -227px;
+    left: 35px;
+}
+
+.assaultAttackingBar {
+    background-image: url('assaultAttackingBar.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 17px;
+    height: 217px;
+    position: relative;
+    bottom: -227px;
+    left: 35px;
+}
+
+.assaultAttack {
+    width: 125px;
+    height: auto;
+    position: relative;
+    bottom: -102px;
+    left: -106px;
+    cursor: pointer;
+}
+
+.count {
+    position: relative;
+    bottom: -101px;
+    left: -108px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.attack {
+    color: #d23600;
+}

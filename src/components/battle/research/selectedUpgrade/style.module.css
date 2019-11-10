@@ -1,0 +1,23 @@
+.wrapper {
+    border: solid 5px #ffffff;
+    text-align: center;
+    width: 194px;
+    height: 68px;
+    margin-top: 13px;
+    margin-left: 34px;
+    background-color: #754444;
+    padding: 3px;
+    border-left: solid 2px #ffffff;
+    border-right: solid 2px #ffffff;
+}
+
+.name,
+.value,
+.price {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.hidden {
+    visibility: hidden;
+}
